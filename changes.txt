@@ -1,2 +1,0 @@
-- Fixed routes
-- Added index.html
