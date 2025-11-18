@@ -12,24 +12,33 @@ window.addEventListener("DOMContentLoaded", () => {
     const box = 20;
     //Spawn inicial
     let snake = [{ x: 200, y: 200 }];
-let meganum = Math.floor(Math.random() * 4) + 1;
-let direction;
+    let meganum = Math.floor(Math.random() * 4) + 1;
+    let direction;
 
-    if (meganum === 1) {
-    direction = "UP";
-    } else if (meganum === 2) {
-    direction = "RIGHT";
-    } else if (meganum === 3) {
-    direction = "DOWN";
-    } else {
-    direction = "LEFT";
+    // Direccion inicial del snake
+    switch (meganum){
+        case 1:
+            direction = "UP";
+            break;
+
+        case 2:
+            direction = "RIGHT";
+            break;
+
+        case 3:
+            direction = "DOWN";
+            break;
+
+        default:
+            direction = "LEFT";
     }
+
     let food = randomFood();
     let score = 0;
     let game = null;
     let running = false;
 
-     function randomFood() {
+    function randomFood() {
         return {
             x: Math.floor(Math.random() * (canvas.width / box)) * box,
             y: Math.floor(Math.random() * (canvas.height / box)) * box
@@ -38,17 +47,53 @@ let direction;
 
     // Controles
     document.addEventListener("keydown", (e) => {
-        if (e.code === "Space") toggleGame();
-        //Flechitas
-        else if (e.code === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-        else if (e.code === "ArrowUp" && direction !== "DOWN") direction = "UP";
-        else if (e.code === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-        else if (e.code === "ArrowDown" && direction !== "UP") direction = "DOWN";
-        //WASD || Menos input lag
-        else if (e.code === "KeyA" && direction !== "RIGHT") direction = "LEFT";
-        else if (e.code === "KeyW" && direction !== "DOWN") direction = "UP";
-        else if (e.code === "KeyD" && direction !== "LEFT") direction = "RIGHT";
-        else if (e.code === "KeyS" && direction !== "UP") direction = "DOWN";
+        switch (e.code){
+            case "Space":
+                toggleGame();
+                break;
+
+            // Movimiento con flechas
+            case "ArrowLeft":
+                if (direction === "RIGHT") {break;}
+                direction = "LEFT";
+                break;
+
+            case "ArrowUp":
+                if (direction === "DOWN") {break;}
+                direction = "UP";
+                break;
+
+            case "ArrowRight":
+                if (direction === "LEFT") {break;}
+                direction = "RIGHT";
+                break;
+
+            case "ArrowDown":
+                if (direction === "UP") {break;}
+                direction = "DOWN";
+                break;
+            
+            // Movimiento con letras
+            case "KeyA":
+                if (direction === "RIGHT") {break;}
+                direction = "LEFT";
+                break;
+
+            case "KeyW":
+                if (direction === "DOWN") {break;}
+                direction = "UP";
+                break;
+
+            case "KeyD":
+                if (direction === "LEFT") {break;}
+                direction = "RIGHT";
+                break;
+
+            case "KeyS":
+                if (direction === "UP") {break;}
+                direction = "DOWN";
+                break;
+        };
     });
 
     // Deshabilitar el click derecho, para que no molesten mis compañeros en las pruebas
@@ -107,10 +152,24 @@ let direction;
         // Movimiento
         let headX = snake[0].x;
         let headY = snake[0].y;
-        if (direction === "LEFT") headX -= box;
-        if (direction === "UP") headY -= box;
-        if (direction === "RIGHT") headX += box;
-        if (direction === "DOWN") headY += box;
+
+        switch (direction){
+            case "LEFT":
+                headX -= box;
+                break;
+            
+            case "UP":
+                headY -= box;
+                break;
+            
+            case "RIGHT":
+                headX += box;
+                break;
+
+            case "DOWN":
+                headY += box;
+                break;
+        }
 
         // Comer
         if (headX === food.x && headY === food.y) {
@@ -154,25 +213,26 @@ let direction;
         score = 0;
         food = randomFood();
     }
-function randomFood() {
-    let newFood;
-    let collision;
-    do {
-        collision = false;
-        newFood = {
-            x: Math.floor(Math.random() * (canvas.width / box)) * box,
-            y: Math.floor(Math.random() * (canvas.height / box)) * box
-        };
-        // Revisar si la nueva posición coincide con alguna parte de la serpiente
-        for (let i = 1; i < snake.length; i++) {
-            if (snake[i].x === newFood.x && snake[i].y === newFood.y) {
-                collision = true;
-                break;
+
+    function randomFood() {
+        let newFood;
+        let collision;
+        do {
+            collision = false;
+            newFood = {
+                x: Math.floor(Math.random() * (canvas.width / box)) * box,
+                y: Math.floor(Math.random() * (canvas.height / box)) * box
+            };
+            // Revisar si la nueva posición coincide con alguna parte de la serpiente
+            for (let i = 1; i < snake.length; i++) {
+                if (snake[i].x === newFood.x && snake[i].y === newFood.y) {
+                    collision = true;
+                    break;
+                }
             }
-        }
-    } while (collision);
-    return newFood;
-}
+        } while (collision);
+        return newFood;
+    }
 
     // Mensaje inicial
     ctx.fillStyle = "#00ffc8";
