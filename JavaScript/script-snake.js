@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
 let meganum = Math.floor(Math.random() * 4) + 1;
 let direction;
 
+    // Direccion inicial del snake
     if (meganum === 1) {
     direction = "UP";
     } else if (meganum === 2) {
@@ -24,12 +25,14 @@ let direction;
     } else {
     direction = "LEFT";
     }
+
+
     let food = randomFood();
     let score = 0;
     let game = null;
     let running = false;
 
-     function randomFood() {
+    function randomFood() {
         return {
             x: Math.floor(Math.random() * (canvas.width / box)) * box,
             y: Math.floor(Math.random() * (canvas.height / box)) * box
@@ -38,17 +41,53 @@ let direction;
 
     // Controles
     document.addEventListener("keydown", (e) => {
-        if (e.code === "Space") toggleGame();
-        //Flechitas
-        else if (e.code === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-        else if (e.code === "ArrowUp" && direction !== "DOWN") direction = "UP";
-        else if (e.code === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-        else if (e.code === "ArrowDown" && direction !== "UP") direction = "DOWN";
-        //WASD || Menos input lag
-        else if (e.code === "KeyA" && direction !== "RIGHT") direction = "LEFT";
-        else if (e.code === "KeyW" && direction !== "DOWN") direction = "UP";
-        else if (e.code === "KeyD" && direction !== "LEFT") direction = "RIGHT";
-        else if (e.code === "KeyS" && direction !== "UP") direction = "DOWN";
+        switch (e.code){
+            case "Space":
+                toggleGame();
+                break;
+
+            // Movimiento con flechas
+            case "ArrowLeft":
+                if (direction === "RIGHT") {break;}
+                direction = "LEFT"
+                break;
+
+            case "ArrowUp":
+                if (direction === "DOWN") {break;}
+                direction = "UP"
+                break;
+
+            case "ArrowRight":
+                if (direction === "LEFT") {break;}
+                direction = "RIGHT"
+                break;
+
+            case "ArrowDown":
+                if (direction === "UP") {break;}
+                direction = "DOWN"
+                break;
+            
+            // Movimiento con letras
+            case "KeyA":
+                if (direction === "RIGHT") {break;}
+                direction = "LEFT"
+                break;
+
+            case "KeyW":
+                if (direction === "DOWN") {break;}
+                direction = "UP"
+                break;
+
+            case "KeyD":
+                if (direction === "LEFT") {break;}
+                direction = "RIGHT"
+                break;
+
+            case "KeyS":
+                if (direction === "UP") {break;}
+                direction = "DOWN"
+                break;
+        };
     });
 
     // Deshabilitar el click derecho, para que no molesten mis compañeros en las pruebas
