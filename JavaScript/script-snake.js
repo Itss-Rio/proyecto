@@ -12,20 +12,26 @@ window.addEventListener("DOMContentLoaded", () => {
     const box = 20;
     //Spawn inicial
     let snake = [{ x: 200, y: 200 }];
-let meganum = Math.floor(Math.random() * 4) + 1;
-let direction;
+    let meganum = Math.floor(Math.random() * 4) + 1;
+    let direction;
 
     // Direccion inicial del snake
-    if (meganum === 1) {
-    direction = "UP";
-    } else if (meganum === 2) {
-    direction = "RIGHT";
-    } else if (meganum === 3) {
-    direction = "DOWN";
-    } else {
-    direction = "LEFT";
-    }
+    switch (meganum){
+        case 1:
+            direction = "UP";
+            break;
 
+        case 2:
+            direction = "RIGHT";
+            break;
+
+        case 3:
+            direction = "DOWN";
+            break;
+
+        default:
+            direction = "LEFT";
+    }
 
     let food = randomFood();
     let score = 0;
@@ -49,43 +55,43 @@ let direction;
             // Movimiento con flechas
             case "ArrowLeft":
                 if (direction === "RIGHT") {break;}
-                direction = "LEFT"
+                direction = "LEFT";
                 break;
 
             case "ArrowUp":
                 if (direction === "DOWN") {break;}
-                direction = "UP"
+                direction = "UP";
                 break;
 
             case "ArrowRight":
                 if (direction === "LEFT") {break;}
-                direction = "RIGHT"
+                direction = "RIGHT";
                 break;
 
             case "ArrowDown":
                 if (direction === "UP") {break;}
-                direction = "DOWN"
+                direction = "DOWN";
                 break;
             
             // Movimiento con letras
             case "KeyA":
                 if (direction === "RIGHT") {break;}
-                direction = "LEFT"
+                direction = "LEFT";
                 break;
 
             case "KeyW":
                 if (direction === "DOWN") {break;}
-                direction = "UP"
+                direction = "UP";
                 break;
 
             case "KeyD":
                 if (direction === "LEFT") {break;}
-                direction = "RIGHT"
+                direction = "RIGHT";
                 break;
 
             case "KeyS":
                 if (direction === "UP") {break;}
-                direction = "DOWN"
+                direction = "DOWN";
                 break;
         };
     });
@@ -146,10 +152,24 @@ let direction;
         // Movimiento
         let headX = snake[0].x;
         let headY = snake[0].y;
-        if (direction === "LEFT") headX -= box;
-        if (direction === "UP") headY -= box;
-        if (direction === "RIGHT") headX += box;
-        if (direction === "DOWN") headY += box;
+
+        switch (direction){
+            case "LEFT":
+                headX -= box;
+                break;
+            
+            case "UP":
+                headY -= box;
+                break;
+            
+            case "RIGHT":
+                headX += box;
+                break;
+
+            case "DOWN":
+                headY += box;
+                break;
+        }
 
         // Comer
         if (headX === food.x && headY === food.y) {
@@ -193,25 +213,26 @@ let direction;
         score = 0;
         food = randomFood();
     }
-function randomFood() {
-    let newFood;
-    let collision;
-    do {
-        collision = false;
-        newFood = {
-            x: Math.floor(Math.random() * (canvas.width / box)) * box,
-            y: Math.floor(Math.random() * (canvas.height / box)) * box
-        };
-        // Revisar si la nueva posición coincide con alguna parte de la serpiente
-        for (let i = 1; i < snake.length; i++) {
-            if (snake[i].x === newFood.x && snake[i].y === newFood.y) {
-                collision = true;
-                break;
+
+    function randomFood() {
+        let newFood;
+        let collision;
+        do {
+            collision = false;
+            newFood = {
+                x: Math.floor(Math.random() * (canvas.width / box)) * box,
+                y: Math.floor(Math.random() * (canvas.height / box)) * box
+            };
+            // Revisar si la nueva posición coincide con alguna parte de la serpiente
+            for (let i = 1; i < snake.length; i++) {
+                if (snake[i].x === newFood.x && snake[i].y === newFood.y) {
+                    collision = true;
+                    break;
+                }
             }
-        }
-    } while (collision);
-    return newFood;
-}
+        } while (collision);
+        return newFood;
+    }
 
     // Mensaje inicial
     ctx.fillStyle = "#00ffc8";
