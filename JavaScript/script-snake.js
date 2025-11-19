@@ -33,8 +33,8 @@ window.addEventListener("DOMContentLoaded", () => {
             direction = "LEFT";
     }
 
-    let food = randomFood(3);
-    let score = 2;
+    let food = randomFood();
+    let score = 0;
     let game = null;
     let running = false;
 
