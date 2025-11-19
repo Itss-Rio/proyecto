@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
     //Cuadrados
     const box = 20;
     //Spawn inicial
-    let snake = [{ x: 125, y: 100 }];
+    let snake = [{ x: 150, y: 100 }];
     let meganum = Math.floor(Math.random() * 4) + 1;
     let direction;
 
