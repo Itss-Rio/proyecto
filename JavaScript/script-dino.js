@@ -155,3 +155,11 @@ gameLoop();
             running = true;
         }
     }
+    
+    // Mensaje inicial
+    ctx.fillStyle = "#00ffc8";
+    ctx.font = "16px 'Press Start 2P', monospace";
+    ctx.shadowColor = "#00ffc8";
+    ctx.shadowBlur = 10;
+    ctx.fillText("Presiona ESPACIO para jugar", 25, canvas.height / 2);
+    ctx.shadowBlur = 0;
