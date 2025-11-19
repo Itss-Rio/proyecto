@@ -1,0 +1,1 @@
+./Imagenes/maquina-arcade.png > Máquina de arcade iconos creados por xnimrodx - Flaticon
