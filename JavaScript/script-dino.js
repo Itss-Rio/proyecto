@@ -122,3 +122,36 @@ setInterval(() => {
 }, 3000);
 
 gameLoop();
+
+
+    // Controles
+    document.addEventListener("keydown", (e) => {
+        switch (e.code){
+            case "Space":
+                toggleGame();
+                break;
+                
+            // Movimiento con flechas
+
+            case "ArrowUp":
+                if (direction === "DOWN") {break;}
+                direction = "UP";
+                break;
+
+            case "ArrowDown":
+                if (direction === "UP") {break;}
+                direction = "DOWN";
+                break;
+            
+            // Movimiento con letras
+            case "KeyW":
+                if (direction === "DOWN") {break;}
+                direction = "UP";
+                break;
+
+            case "KeyS":
+                if (direction === "UP") {break;}
+                direction = "DOWN";
+                break;
+        };
+    });
