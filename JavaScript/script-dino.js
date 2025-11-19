@@ -107,15 +107,23 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === ' ') {
-        dino.jump();
-        e.preventDefault();
-    }
-    if (e.key === 'r' && game.gameOver) {
-        location.reload();
-    }
-});
+    // Controles
+    document.addEventListener("keydown", (e) => {
+        switch (e.code){
+            case "Space":
+                toggleGame();
+                break;
+
+        case (e.key === 'ArrowUp'):
+            dino.jump();
+            e.preventDefault();
+            break;
+        
+        case (e.key === 'ArrowDown' && game.gameOver):
+            location.reload();
+            e.preventDefault();
+            break;
+}    });
 
 setInterval(() => {
     if (!game.gameOver) spawnObstacle();
@@ -130,28 +138,6 @@ gameLoop();
             case "Space":
                 toggleGame();
                 break;
-                
-            // Movimiento con flechas
 
-            case "ArrowUp":
-                if (direction === "DOWN") {break;}
-                direction = "UP";
-                break;
-
-            case "ArrowDown":
-                if (direction === "UP") {break;}
-                direction = "DOWN";
-                break;
-            
-            // Movimiento con letras
-            case "KeyW":
-                if (direction === "DOWN") {break;}
-                direction = "UP";
-                break;
-
-            case "KeyS":
-                if (direction === "UP") {break;}
-                direction = "DOWN";
-                break;
         };
     });
