@@ -114,12 +114,12 @@ function gameLoop() {
                 toggleGame();
                 break;
 
-        case (e.key === 'ArrowUp'):
+        case (e.key === 'ArrowUp' || e.key === 'w'):
             dino.jump();
             e.preventDefault();
             break;
         
-        case (e.key === 'ArrowDown' && game.gameOver):
+        case (e.key === 'r' && game.gameOver):
             location.reload();
             e.preventDefault();
             break;
