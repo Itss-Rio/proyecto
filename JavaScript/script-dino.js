@@ -130,14 +130,3 @@ setInterval(() => {
 }, 3000);
 
 gameLoop();
-
-
-    // Controles
-    document.addEventListener("keydown", (e) => {
-        switch (e.code){
-            case "Space":
-                toggleGame();
-                break;
-
-        };
-    });
