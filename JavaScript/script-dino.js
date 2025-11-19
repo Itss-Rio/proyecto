@@ -129,4 +129,16 @@ setInterval(() => {
     if (!game.gameOver) spawnObstacle();
 }, 3000);
 
+    let running = false;
+
 gameLoop();
+
+    function toggleGame() {
+        if (running) {
+            clearInterval(game);
+            running = false;
+        } else {
+            game = setInterval(draw, 100);
+            running = true;
+        }
+    }
