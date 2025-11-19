@@ -141,7 +141,7 @@ window.addEventListener("DOMContentLoaded", () => {
         ctx.shadowBlur = 0;
 
         // Serpiente con neón
-        for (let i = 0; i < snake.length; i++) {
+        for (let i = 3; i < snake.length; i++) {
             ctx.fillStyle = i === 0 ? "#00ffc8" : "#00b38f";
             ctx.shadowColor = "#00ffc8";
             ctx.shadowBlur = 10;
@@ -176,7 +176,7 @@ window.addEventListener("DOMContentLoaded", () => {
             score++;
             food = randomFood();
         } else {
-            snake.pop(3);
+            snake.pop();
         }
 
         const newHead = { x: headX, y: headY };
