@@ -38,7 +38,13 @@ const dino = {
             this.iJumping = true;
             this.dy = -this.jumpPower;
         }
-    }
+    },
+    crouch() {
+              if (!this.crouch) {
+            this.crouch = true;
+            this.dy = -this.crouchPower;
+        }
+    }  
 };
 
 const obstacles = [];
@@ -116,6 +122,11 @@ function gameLoop() {
 
         case (e.key === 'ArrowUp' || e.key === 'w'):
             dino.jump();
+            e.preventDefault();
+            break;
+
+        case (e.key === 'ArrowDown' || e.key === 's'):
+            dino.crouch();
             e.preventDefault();
             break;
         
