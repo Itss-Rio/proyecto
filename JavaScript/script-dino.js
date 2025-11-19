@@ -18,6 +18,8 @@ const dino = {
     dy: 0,
     jumpPower: 15,
     iJumping: false,
+    crouchPower: 5,
+    icrouch: false,
     draw() {
         ctx.fillStyle = '#000';
         ctx.fillRect(this.x, this.y, this.width, this.height);
