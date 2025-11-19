@@ -33,8 +33,8 @@ window.addEventListener("DOMContentLoaded", () => {
             direction = "LEFT";
     }
 
-    let food = randomFood();
-    let score = 0;
+    let food = randomFood(3);
+    let score = 2;
     let game = null;
     let running = false;
 
@@ -141,7 +141,7 @@ window.addEventListener("DOMContentLoaded", () => {
         ctx.shadowBlur = 0;
 
         // Serpiente con neón
-        for (let i = 3; i < snake.length; i++) {
+        for (let i = 0; i < snake.length; i++) {
             ctx.fillStyle = i === 0 ? "#00ffc8" : "#00b38f";
             ctx.shadowColor = "#00ffc8";
             ctx.shadowBlur = 10;
