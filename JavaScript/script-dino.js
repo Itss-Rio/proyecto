@@ -40,8 +40,8 @@ const dino = {
         }
     },
     crouch() {
-              if (!this.crouch) {
-            this.crouch = true;
+              if (!this.icrouch) {
+            this.icrouch = true;
             this.dy = -this.crouchPower;
         }
     }  
