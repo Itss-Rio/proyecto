@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const gameArea = document.getElementById("game-area-dino");
     const canvas = document.createElement("canvas");
     canvas.width = 800;
-    canvas.height = 200;
+    canvas.height = 400;
     canvas.style.borderRadius = "25px";
     gameArea.innerHTML = "";
     gameArea.appendChild(canvas);
