@@ -1,15 +1,13 @@
 window.addEventListener("DOMContentLoaded", () => {
     const gameArea = document.getElementById("game-area-dino");
     const canvas = document.createElement("canvas");
-    canvas.width = 500;
-    canvas.height = 500;
-    canvas.style.borderRadius = "10px";
+    canvas.width = 800;
+    canvas.height = 200;
+    canvas.style.borderRadius = "25px";
     gameArea.innerHTML = "";
     gameArea.appendChild(canvas);
     const ctx = canvas.getContext("2d");
 
-canvas.width = 800;
-canvas.height = 200;
 
 const game = {
     score: 0,
@@ -164,9 +162,9 @@ gameLoop();
     }
 
     // Mensaje inicial
-    ctx.fillStyle = "#00ffc8";
+    ctx.fillStyle = "#303635ff";
     ctx.font = "16px 'Press Start 2P', monospace";
-    ctx.shadowColor = "#00ffc8";
+    ctx.shadowColor = "#303635ff";
     ctx.shadowBlur = 10;
     ctx.fillText("Presiona ESPACIO para jugar", 25, canvas.height / 2);
     ctx.shadowBlur = 0;

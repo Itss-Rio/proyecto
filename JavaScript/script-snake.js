@@ -11,12 +11,12 @@ window.addEventListener("DOMContentLoaded", () => {
     //Cuadrados
     const box = 20;
     //Spawn inicial
-    let snake = [{ x: 150, y: 100 }];
-    let meganum = Math.floor(Math.random() * 4) + 1;
+    let snake = [{ x: 100, y: 100 }];
+    let spawnDIR = Math.floor(Math.random() * 4) + 1;
     let direction;
 
     // Direccion inicial del snake
-    switch (meganum){
+    switch (spawnDIR){
         case 1:
             direction = "UP";
             break;
