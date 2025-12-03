@@ -169,3 +169,8 @@ gameLoop();
     ctx.fillText("Presiona ESPACIO para jugar", 25, canvas.height / 2);
     ctx.shadowBlur = 0;
 });
+
+    // Deshabilitar el click derecho, para que no molesten mis compañeros en las pruebas
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    });
