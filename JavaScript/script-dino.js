@@ -25,17 +25,17 @@ function Loop() {
 //****** LÓGICA DEL JUEGO ********//
 
 // --- FÍSICA AJUSTADA (SALTO CORTO Y RÁPIDO) ---
-var sueloY = 50; 
+var sueloY = 50; // La base del juego (altura del suelo en CSS)
 var velY = 0;
-var impulso = 1000; // MÁS BAJO
-var gravedad = 6000; // MÁS FUERTE
+var impulso = 1000; // Impulso de salto (fuerza inicial)
+var gravedad = 6000; // Fuerza de gravedad (caída rápida)
 
 var dinoPosX = 50;
 var dinoPosY = sueloY; 
 
 var sueloX = 0;
-var velEscenario = 1280/3;
-var gameVel = 1;
+var velEscenario = 1800/3; // Aumentada para una pantalla de 1400px para sentir más velocidad
+var gameVel = 1.2; // Velocidad base ligeramente mayor para movimiento inicial
 var score = 0;
 
 var parado = false;
@@ -85,6 +85,7 @@ function Update() {
     MoverNubes();
     DetectarColision();
 
+    // Aplicar gravedad
     velY -= gravedad * deltaTime;
 }
 
@@ -125,7 +126,7 @@ function TocarSuelo() {
 
 function MoverSuelo() {
     sueloX += CalcularDesplazamiento();
-    // Usamos contenedor.clientWidth para asegurar que el suelo se repita correctamente sobre la nueva dimensión de 1400px
+    // Usamos contenedor.clientWidth (1400px) para asegurar que el suelo se repita correctamente
     suelo.style.left = -(sueloX % contenedor.clientWidth) + "px";
 }
 
@@ -158,7 +159,7 @@ function CrearObstaculo() {
     contenedor.appendChild(obstaculo);
     obstaculo.classList.add("cactus");
     if(Math.random() > 0.5) obstaculo.classList.add("cactus2");
-    obstaculo.posX = contenedor.clientWidth; // Aparece desde el nuevo borde de 1400px
+    obstaculo.posX = contenedor.clientWidth; // Aparece desde el borde derecho (1400px)
     obstaculo.style.left = contenedor.clientWidth + "px";
     obstaculo.style.bottom = obstaculoPosY + "px";
 
@@ -170,7 +171,7 @@ function CrearNube() {
     var nube = document.createElement("div");
     contenedor.appendChild(nube);
     nube.classList.add("nube");
-    nube.posX = contenedor.clientWidth; // Aparece desde el nuevo borde de 1400px
+    nube.posX = contenedor.clientWidth; // Aparece desde el borde derecho (1400px)
     nube.style.left = contenedor.clientWidth + "px";
     nube.style.bottom = minNubeY + Math.random() * (maxNubeY - minNubeY) + "px";
     
@@ -224,6 +225,7 @@ function DetectarColision() {
         if(obstaculos[i].posX > dinoPosX + dino.clientWidth) {
             break; 
         }else{
+            // Ajustar los márgenes de colisión para ser más permisivos (los números están en px)
             if(IsCollision(dino, obstaculos[i], 10, 25, 15, 20)) {
                 GameOver();
             }
@@ -245,7 +247,7 @@ function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft)
 
 function ReiniciarJuego() {
     score = 0;
-    gameVel = 1;
+    gameVel = 1.2; // Reiniciar a la velocidad base ajustada
     textoScore.innerText = score;
     parado = false;
     saltando = false;
