@@ -84,7 +84,7 @@ function Update() {
 }
 
 function HandleKeyDown(ev){
-    if(ev.keyCode == 32){
+    if(ev.keyCode == 32){ // Barra espaciadora
         Saltar();
     }
 }
@@ -100,7 +100,6 @@ function Saltar(){
 function MoverDinosaurio() {
     dinoPosY += velY * deltaTime;
     if(dinoPosY < sueloY){
-        
         TocarSuelo();
     }
     dino.style.bottom = dinoPosY+"px";
@@ -153,9 +152,7 @@ function CrearObstaculo() {
     obstaculo.style.left = contenedor.clientWidth+"px";
 
     obstaculos.push(obstaculo);
-    tiempoHastaObstaculo =
-        tiempoObstaculoMin +
-        Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
+    tiempoHastaObstaculo = tiempoObstaculoMin + Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
 }
 
 function CrearNube() {
@@ -167,9 +164,7 @@ function CrearNube() {
     nube.style.bottom = minNubeY + Math.random() * (maxNubeY-minNubeY)+"px";
     
     nubes.push(nube);
-    tiempoHastaNube =
-        tiempoNubeMin +
-        Math.random() * (tiempoNubeMax - tiempoNubeMin) / gameVel;
+    tiempoHastaNube = tiempoNubeMin + Math.random() * (tiempoNubeMax - tiempoNubeMin) / velNube;
 }
 
 function MoverObstaculos() {
@@ -200,15 +195,12 @@ function MoverNubes() {
 function GanarPuntos() {
     score++;
     textoScore.innerText = score;
-
     if(score == 5){
         gameVel = 1.5;
         contenedor.classList.add("mediodia");
-
     } else if(score == 10){
         gameVel = 2;
         contenedor.classList.add("tarde");
-
     } else if(score == 20){
         gameVel = 3;
         contenedor.classList.add("noche");
@@ -223,7 +215,8 @@ function GameOver() {
 function DetectarColision() {
     for (var i = 0; i < obstaculos.length; i++) {
         if(obstaculos[i].posX > dinoPosX + dino.clientWidth) {
-            break;
+            // Optimización: si el obstáculo está lejos, no comprobamos colisión exacta
+            break; 
         }else{
             if(IsCollision(dino, obstaculos[i], 10, 30, 15, 20)) {
                 GameOver();

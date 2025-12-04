@@ -1,48 +1,51 @@
+/* ESTRUCTURA DEL JUEGO */
 .contenedor {
     width: 920px;
     height: 280px;
     margin: 0 auto;
     position: relative;
-    overflow: hidden;
-
+    overflow: hidden; /* Esto oculta lo que se salga del cuadro */
+    
+    /* Fondo oscuro inicial */
     background: linear-gradient(#232323, #0d0d0d);
+    
+    /* Bordes Neón */
     border: 3px solid #6c5ce7;
     border-radius: 12px;
     box-shadow: 0 0 25px #6c5ce7, 0 0 50px #00ffc8;
 }
 
-.mediodia {
-    background-color: #33334d;
-}
+/* ESTADOS DEL CIELO */
+.mediodia { background-color: #33334d; }
+.tarde { background-color: #4d3333; }
+.noche { background-color: #1a1a32; }
 
-.tarde {
-    background-color: #4d3333;
-}
-
-.noche {
-    background-color: #1a1a32;
-}
-
-/* SPRITES DEL JUEGO */
-
-.dino {
-    width: 84px;
-    height: 84px;
+/* TEXTOS */
+.score {
     position: absolute;
-    bottom: 22px;
-    left: 42px;
-    z-index: 2;
-    background: url(../Imagenes/dino.png) repeat-x 0px 0px;
-    background-size: 336px 84px;
+    top: 10px;
+    right: 15px;
+    z-index: 10;
+    color: #00ffc8;
+    font-family: 'Press Start 2P', cursive; /* Fuente pixelada */
+    font-size: 30px;
+    text-shadow: 0 0 10px #00ffc8;
 }
 
-.dino-corriendo {
-    animation: animarDino 0.25s steps(2) infinite;
+.game-over {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 100px; /* Centrado verticalmente */
+    color: #ff00ff;
+    font-size: 40px;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 10px #ff00ff, 0 0 25px #6c5ce7;
+    z-index: 20;
 }
 
-.dino-estrellado {
-    background-position-x: -252px;
-}
+/* SPRITES (IMÁGENES) - RUTAS CORREGIDAS */
 
 .suelo {
     width: 200%;
@@ -50,8 +53,21 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background: url(../Imagenes/suelo.png) repeat-x 0px 0px;
+    /* Ruta corregida: sube a PROYECTO y baja a Imagenes */
+    background: url('../Imagenes/suelo.png') repeat-x 0px 0px;
     background-size: 50% 42px;
+    z-index: 3;
+}
+
+.dino {
+    width: 84px;
+    height: 84px;
+    position: absolute;
+    bottom: 22px; /* Justo encima del suelo */
+    left: 42px;
+    z-index: 2;
+    background: url('../Imagenes/dino.png') repeat-x 0px 0px; 
+    background-size: 336px 84px;
 }
 
 .cactus {
@@ -61,13 +77,13 @@
     bottom: 16px;
     left: 600px;
     z-index: 1;
-    background: url(../Imagenes/cactus1.png) no-repeat;
+    background: url('../Imagenes/cactus1.png') no-repeat;
 }
 
 .cactus2 {
     width: 98px;
     height: 66px;
-    background: url(../Imagenes/cactus2.png) no-repeat;
+    background: url('../Imagenes/cactus2.png') no-repeat;
 }
 
 .nube {
@@ -75,34 +91,17 @@
     height: 26px;
     position: absolute;
     z-index: 0;
-    background: url(../Imagenes/nube.png) no-repeat;
+    background: url('../Imagenes/nube.png') no-repeat;
     background-size: 92px 26px;
 }
 
-.score {
-    width: 140px;
-    height: 35px;
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    z-index: 10;
-    color: #00ffc8;
-    font-family: 'Press Start 2P';
-    font-size: 22px;
-    text-shadow: 0 0 10px #00ffc8;
+/* ANIMACIONES */
+.dino-corriendo {
+    animation: animarDino 0.25s steps(2) infinite;
 }
 
-/* GAME OVER */
-.game-over {
-    display: none;
-    position: absolute;
-    width: 100%;
-    top: 120px;
-    text-align: center;
-    color: #ff00ff;
-    font-size: 40px;
-    font-family: 'Press Start 2P';
-    text-shadow: 0 0 10px #ff00ff, 0 0 25px #6c5ce7;
+.dino-estrellado {
+    background-position-x: -252px;
 }
 
 @keyframes animarDino {
