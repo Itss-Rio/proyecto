@@ -1,49 +1,64 @@
-/* ESTRUCTURA DEL JUEGO - DUPLICADO EL TAMAÑO */
+/* --- ESTRUCTURA DEL JUEGO (TAMAÑO DUPLICADO) --- */
 .contenedor {
-    /* Original: 920px x 280px */
+    /* Tamaño original duplicado (1840x560) */
     width: 1840px; 
     height: 560px;
     margin: 0 auto;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
     
-    background: linear-gradient(#232323, #0d0d0d);
-    border: 3px solid #6c5ce7;
+    /* Fondo inicial (Amanecer oscuro) */
+    background: linear-gradient(to bottom, #232323, #0d0d0d);
+    
+    /* Bordes Neón */
+    border: 4px solid #6c5ce7; /* Borde un poco más grueso */
     border-radius: 12px;
-    box-shadow: 0 0 25px #6c5ce7, 0 0 50px #00ffc8;
+    box-shadow: 0 0 25px #6c5ce7, 0 0 60px #00ffc8;
 }
 
-/* ESTADOS DEL CIELO */
-.mediodia { background-color: #33334d; }
-.tarde { background-color: #4d3333; }
-.noche { background-color: #1a1a32; }
+/* --- FONDOS VISTOSOS (Gradientes de cielo) --- */
+.mediodia {
+    /* Cielo azul claro a azul medio */
+    background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
+}
 
-/* TEXTOS */
+.tarde {
+    /* Atardecer naranja a rojizo */
+    background: linear-gradient(to bottom, #fa709a 0%, #fee140 100%);
+}
+
+.noche {
+    /* Noche profunda de morado a azul oscuro */
+    background: linear-gradient(to bottom, #1e3c72 0%, #2a5298 100%);
+}
+
+/* --- UI TEXTOS --- */
 .score {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 20px; /* Ajustado */
+    right: 30px; /* Ajustado */
     z-index: 10;
     color: #00ffc8;
     font-family: 'Press Start 2P', cursive;
-    font-size: 30px;
+    font-size: 40px; /* Texto más grande */
     text-shadow: 0 0 10px #00ffc8;
 }
 
 .game-over {
-    display: none; 
+    display: none;
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 220px; /* Ajuste para centrar en la nueva altura (560px) */
+    top: 200px; /* Centrado en la nueva altura */
     color: #ff00ff;
-    font-size: 80px; /* Tamaño del texto escalado */
+    font-size: 70px; /* Título grande */
     font-family: 'Press Start 2P', cursive;
     text-shadow: 0 0 10px #ff00ff, 0 0 25px #6c5ce7;
     z-index: 20;
+    line-height: 1.5; /* Espacio para el subtítulo */
 }
 
-/* SPRITES (IMÁGENES) - RUTAS CORRECTAS */
+/* --- SPRITES Y POSICIONES AJUSTADAS --- */
 
 .suelo {
     width: 200%;
@@ -60,8 +75,9 @@
     width: 84px;
     height: 84px;
     position: absolute;
-    bottom: 44px; /* Ajuste: El dino debe estar sobre el nuevo suelo (22px * 2) */
-    left: 42px;
+    /* Ajustado: El suelo base ahora es más alto visualmente */
+    bottom: 42px; 
+    left: 50px;
     z-index: 2;
     background: url('../Imagenes/dino.png') repeat-x 0px 0px; 
     background-size: 336px 84px;
@@ -71,8 +87,8 @@
     width: 46px;
     height: 96px;
     position: absolute;
-    bottom: 32px; /* Ajuste: Obstáculo sobre el nuevo suelo (16px * 2) */
-    left: 600px;
+    bottom: 30px; /* Ajustado para el nuevo suelo */
+    left: 1840px; /* Empieza fuera de la nueva pantalla */
     z-index: 1;
     background: url('../Imagenes/cactus1.png') no-repeat;
 }
@@ -93,13 +109,8 @@
 }
 
 /* ANIMACIONES */
-.dino-corriendo {
-    animation: animarDino 0.25s steps(2) infinite;
-}
-
-.dino-estrellado {
-    background-position-x: -252px;
-}
+.dino-corriendo { animation: animarDino 0.25s steps(2) infinite; }
+.dino-estrellado { background-position-x: -252px; }
 
 @keyframes animarDino {
     from { background-position-x: -84px; }
