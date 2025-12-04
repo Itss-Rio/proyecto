@@ -1,7 +1,7 @@
 /* --- ESTRUCTURA PRINCIPAL (TAMAÑO MÁS ANCHO Y BAJO) --- */
 .contenedor {
-    width: 1400px; /* Más ancho para sensación de carrera */
-    height: 400px; /* Menos alto */
+    width: 1400px; /* ANCHO DEFINITIVO: Más ancho para sensación de carrera */
+    height: 400px; /* Altura más compacta */
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -79,7 +79,7 @@
     height: 96px;
     position: absolute;
     bottom: 50px; /* Base del cactus sobre el suelo de 50px */
-    left: 1400px; 
+    left: 1400px; /* Sale por el nuevo ancho */
     z-index: 1;
     background: url('../Imagenes/cactus1.png') no-repeat;
 }

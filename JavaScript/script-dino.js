@@ -24,11 +24,11 @@ function Loop() {
 
 //****** LÓGICA DEL JUEGO ********//
 
-// --- FÍSICA AÚN MÁS AJUSTADA ---
+// --- FÍSICA AJUSTADA (SALTO CORTO Y RÁPIDO) ---
 var sueloY = 50; 
 var velY = 0;
-var impulso = 1200; // REDUCIDO para salto más bajo
-var gravedad = 5000; // AUMENTADO para caída más rápida
+var impulso = 1000; // MÁS BAJO
+var gravedad = 6000; // MÁS FUERTE
 
 var dinoPosX = 50;
 var dinoPosY = sueloY; 
@@ -45,15 +45,15 @@ var saltando = false;
 var tiempoHastaObstaculo = 2;
 var tiempoObstaculoMin = 0.7;
 var tiempoObstaculoMax = 1.8;
-var obstaculoPosY = 50; // Alineado al suelo
+var obstaculoPosY = 50; 
 var obstaculos = [];
 
 // NUBES
 var tiempoHastaNube = 0.5;
 var tiempoNubeMin = 0.7;
 var tiempoNubeMax = 2.7;
-var maxNubeY = 350; // Ajustado a la nueva altura de 400px
-var minNubeY = 150; // Ajustado a la nueva altura
+var maxNubeY = 350; 
+var minNubeY = 150; 
 var nubes = [];
 var velNube = 0.5;
 
@@ -125,6 +125,7 @@ function TocarSuelo() {
 
 function MoverSuelo() {
     sueloX += CalcularDesplazamiento();
+    // Usamos contenedor.clientWidth para asegurar que el suelo se repita correctamente sobre la nueva dimensión de 1400px
     suelo.style.left = -(sueloX % contenedor.clientWidth) + "px";
 }
 
@@ -157,7 +158,7 @@ function CrearObstaculo() {
     contenedor.appendChild(obstaculo);
     obstaculo.classList.add("cactus");
     if(Math.random() > 0.5) obstaculo.classList.add("cactus2");
-    obstaculo.posX = contenedor.clientWidth;
+    obstaculo.posX = contenedor.clientWidth; // Aparece desde el nuevo borde de 1400px
     obstaculo.style.left = contenedor.clientWidth + "px";
     obstaculo.style.bottom = obstaculoPosY + "px";
 
@@ -169,7 +170,7 @@ function CrearNube() {
     var nube = document.createElement("div");
     contenedor.appendChild(nube);
     nube.classList.add("nube");
-    nube.posX = contenedor.clientWidth;
+    nube.posX = contenedor.clientWidth; // Aparece desde el nuevo borde de 1400px
     nube.style.left = contenedor.clientWidth + "px";
     nube.style.bottom = minNubeY + Math.random() * (maxNubeY - minNubeY) + "px";
     
