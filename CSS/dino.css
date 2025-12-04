@@ -1,47 +1,33 @@
-/* --- ESTRUCTURA DEL JUEGO (TAMAÑO DUPLICADO) --- */
+/* --- ESTRUCTURA PRINCIPAL (TAMAÑO GRANDE) --- */
 .contenedor {
-    /* Tamaño original duplicado (1840x560) */
-    width: 1840px; 
-    height: 560px;
+    width: 1200px; /* Ancho más manejable */
+    height: 500px; /* Alto duplicado aprox */
     margin: 0 auto;
     position: relative;
     overflow: hidden;
     
-    /* Fondo inicial (Amanecer oscuro) */
+    /* Fondo base (Amanecer oscuro) */
     background: linear-gradient(to bottom, #232323, #0d0d0d);
     
-    /* Bordes Neón */
-    border: 4px solid #6c5ce7; /* Borde un poco más grueso */
+    border: 4px solid #6c5ce7;
     border-radius: 12px;
-    box-shadow: 0 0 25px #6c5ce7, 0 0 60px #00ffc8;
+    box-shadow: 0 0 25px #6c5ce7;
 }
 
-/* --- FONDOS VISTOSOS (Gradientes de cielo) --- */
-.mediodia {
-    /* Cielo azul claro a azul medio */
-    background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
-}
+/* --- FONDOS DE CIELO (Se activan con puntos) --- */
+.mediodia { background: linear-gradient(to bottom, #4facfe, #00f2fe); }
+.tarde    { background: linear-gradient(to bottom, #fa709a, #fee140); }
+.noche    { background: linear-gradient(to bottom, #1e3c72, #2a5298); }
 
-.tarde {
-    /* Atardecer naranja a rojizo */
-    background: linear-gradient(to bottom, #fa709a 0%, #fee140 100%);
-}
-
-.noche {
-    /* Noche profunda de morado a azul oscuro */
-    background: linear-gradient(to bottom, #1e3c72 0%, #2a5298 100%);
-}
-
-/* --- UI TEXTOS --- */
+/* --- MARCADOR Y TEXTOS --- */
 .score {
     position: absolute;
-    top: 20px; /* Ajustado */
-    right: 30px; /* Ajustado */
+    top: 20px;
+    right: 30px;
     z-index: 10;
     color: #00ffc8;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 40px; /* Texto más grande */
-    text-shadow: 0 0 10px #00ffc8;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 40px;
 }
 
 .game-over {
@@ -49,25 +35,31 @@
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 200px; /* Centrado en la nueva altura */
+    top: 50%; /* Centrado perfecto */
+    transform: translateY(-50%);
     color: #ff00ff;
-    font-size: 70px; /* Título grande */
-    font-family: 'Press Start 2P', cursive;
-    text-shadow: 0 0 10px #ff00ff, 0 0 25px #6c5ce7;
+    font-size: 50px;
+    font-family: 'Press Start 2P', monospace;
     z-index: 20;
-    line-height: 1.5; /* Espacio para el subtítulo */
+    line-height: 1.5;
 }
 
-/* --- SPRITES Y POSICIONES AJUSTADAS --- */
+.subtexto {
+    display: block;
+    font-size: 20px;
+    color: #fff;
+    margin-top: 15px;
+}
 
+/* --- ELEMENTOS DEL JUEGO --- */
 .suelo {
     width: 200%;
-    height: 42px;
+    height: 50px; /* Suelo un poco más grueso */
     position: absolute;
     bottom: 0;
     left: 0;
     background: url('../Imagenes/suelo.png') repeat-x 0px 0px;
-    background-size: 50% 42px;
+    background-size: 50% 50px; 
     z-index: 3;
 }
 
@@ -75,8 +67,7 @@
     width: 84px;
     height: 84px;
     position: absolute;
-    /* Ajustado: El suelo base ahora es más alto visualmente */
-    bottom: 42px; 
+    bottom: 50px; /* Apoyado justo sobre el suelo de 50px */
     left: 50px;
     z-index: 2;
     background: url('../Imagenes/dino.png') repeat-x 0px 0px; 
@@ -87,8 +78,8 @@
     width: 46px;
     height: 96px;
     position: absolute;
-    bottom: 30px; /* Ajustado para el nuevo suelo */
-    left: 1840px; /* Empieza fuera de la nueva pantalla */
+    bottom: 50px; /* Alineado al suelo */
+    left: 1200px; /* Fuera de pantalla a la derecha */
     z-index: 1;
     background: url('../Imagenes/cactus1.png') no-repeat;
 }
@@ -108,7 +99,7 @@
     background-size: 92px 26px;
 }
 
-/* ANIMACIONES */
+/* --- ANIMACIONES --- */
 .dino-corriendo { animation: animarDino 0.25s steps(2) infinite; }
 .dino-estrellado { background-position-x: -252px; }
 

@@ -22,15 +22,13 @@ function Loop() {
     requestAnimationFrame(Loop);
 }
 
-//****** GAME LOGIC ********//
+//****** LÓGICA DEL JUEGO ********//
 
-// --- FÍSICAS ESCALADAS PARA PANTALLA DOBLE ---
-// Hemos duplicado aproximadamente la gravedad y el impulso 
-// para que se sienta bien en una pantalla del doble de alto.
-var sueloY = 42; 
+// FÍSICA AJUSTADA (Para que no flote tanto)
+var sueloY = 50; // Debe coincidir con el height del .suelo en CSS
 var velY = 0;
-var impulso = 1800; // Antes 900
-var gravedad = 5000; // Antes 2500
+var impulso = 1400; // REDUCIDO: Salta menos bestia
+var gravedad = 4500; // AUMENTADO: Cae más rápido
 
 var dinoPosX = 50;
 var dinoPosY = sueloY; 
@@ -43,21 +41,23 @@ var score = 0;
 var parado = false;
 var saltando = false;
 
-// Tiempos ajustados
-var tiempoHastaObstaculo = 2.5; // Un poco más de tiempo inicial
+// OBSTÁCULOS
+var tiempoHastaObstaculo = 2; // Espera 2 seg al inicio
 var tiempoObstaculoMin = 0.7;
 var tiempoObstaculoMax = 1.8;
-var obstaculoPosY = 30; // Ajustado al nuevo suelo
+var obstaculoPosY = 50; // Alineado al suelo
 var obstaculos = [];
 
+// NUBES
 var tiempoHastaNube = 0.5;
 var tiempoNubeMin = 0.7;
 var tiempoNubeMax = 2.7;
-var maxNubeY = 520; // Altura máxima nube duplicada
-var minNubeY = 200; // Altura mínima nube duplicada
+var maxNubeY = 450;
+var minNubeY = 200;
 var nubes = [];
 var velNube = 0.5;
 
+// ELEMENTOS HTML
 var contenedor;
 var dino;
 var textoScore;
@@ -70,11 +70,13 @@ function Start() {
     contenedor = document.querySelector(".contenedor");
     textoScore = document.querySelector(".score");
     dino = document.querySelector(".dino");
+    
+    // Escuchar teclas
     document.addEventListener("keydown", HandleKeyDown);
 }
 
 function Update() {
-    if(parado) return; // Si está parado, no actualiza nada
+    if(parado) return; // Si perdió, congelar todo
     
     MoverDinosaurio();
     MoverSuelo();
@@ -87,14 +89,11 @@ function Update() {
     velY -= gravedad * deltaTime;
 }
 
-// --- NUEVA LÓGICA DE TECLADO CON REINICIO ---
 function HandleKeyDown(ev){
-    if(ev.keyCode == 32){ // Barra espaciadora
-        if(parado) {
-            // Si el juego está parado (Game Over), reiniciamos
+    if(ev.keyCode == 32){ // ESPACIO
+        if(parado){
             ReiniciarJuego();
         } else {
-            // Si no, saltamos normal
             Saltar();
         }
     }
@@ -113,7 +112,7 @@ function MoverDinosaurio() {
     if(dinoPosY < sueloY){
         TocarSuelo();
     }
-    dino.style.bottom = dinoPosY+"px";
+    dino.style.bottom = dinoPosY + "px";
 }
 
 function TocarSuelo() {
@@ -160,13 +159,11 @@ function CrearObstaculo() {
     obstaculo.classList.add("cactus");
     if(Math.random() > 0.5) obstaculo.classList.add("cactus2");
     obstaculo.posX = contenedor.clientWidth;
-    obstaculo.style.left = contenedor.clientWidth+"px";
-    // Posición vertical ajustada en CSS, no es necesario tocar el bottom aquí si el CSS está bien
+    obstaculo.style.left = contenedor.clientWidth + "px";
+    obstaculo.style.bottom = obstaculoPosY + "px";
 
     obstaculos.push(obstaculo);
-    tiempoHastaObstaculo =
-        tiempoObstaculoMin +
-        Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
+    tiempoHastaObstaculo = tiempoObstaculoMin + Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
 }
 
 function CrearNube() {
@@ -174,13 +171,11 @@ function CrearNube() {
     contenedor.appendChild(nube);
     nube.classList.add("nube");
     nube.posX = contenedor.clientWidth;
-    nube.style.left = contenedor.clientWidth+"px";
-    nube.style.bottom = minNubeY + Math.random() * (maxNubeY-minNubeY)+"px";
+    nube.style.left = contenedor.clientWidth + "px";
+    nube.style.bottom = minNubeY + Math.random() * (maxNubeY - minNubeY) + "px";
     
     nubes.push(nube);
-    tiempoHastaNube =
-        tiempoNubeMin +
-        Math.random() * (tiempoNubeMax - tiempoNubeMin) / gameVel;
+    tiempoHastaNube = tiempoNubeMin + Math.random() * (tiempoNubeMax - tiempoNubeMin) / velNube;
 }
 
 function MoverObstaculos() {
@@ -191,7 +186,7 @@ function MoverObstaculos() {
             GanarPuntos();
         }else{
             obstaculos[i].posX -= CalcularDesplazamiento();
-            obstaculos[i].style.left = obstaculos[i].posX+"px";
+            obstaculos[i].style.left = obstaculos[i].posX + "px";
         }
     }
 }
@@ -203,7 +198,7 @@ function MoverNubes() {
             nubes.splice(i, 1);
         }else{
             nubes[i].posX -= CalcularDesplazamiento() * velNube;
-            nubes[i].style.left = nubes[i].posX+"px";
+            nubes[i].style.left = nubes[i].posX + "px";
         }
     }
 }
@@ -211,18 +206,14 @@ function MoverNubes() {
 function GanarPuntos() {
     score++;
     textoScore.innerText = score;
-
-    // Puntos ajustados para que tarde más en cambiar el cielo
-    if(score == 10){ 
-        gameVel = 1.3;
-        contenedor.classList.add("mediodia");
-    } else if(score == 25){
-        gameVel = 1.7;
-        contenedor.classList.add("tarde");
-    } else if(score == 50){
-        gameVel = 2.2;
-        contenedor.classList.add("noche");
-    }
+    
+    // Cambiar fondos
+    if(score == 10) contenedor.classList.add("mediodia");
+    else if(score == 25) contenedor.classList.add("tarde");
+    else if(score == 50) contenedor.classList.add("noche");
+    
+    // Aumentar velocidad poco a poco
+    if(score % 5 == 0) gameVel += 0.1;
 }
 
 function GameOver() {
@@ -233,9 +224,8 @@ function GameOver() {
 function DetectarColision() {
     for (var i = 0; i < obstaculos.length; i++) {
         if(obstaculos[i].posX > dinoPosX + dino.clientWidth) {
-            break;
+            break; 
         }else{
-            // Padding ajustado ligeramente
             if(IsCollision(dino, obstaculos[i], 10, 25, 15, 20)) {
                 GameOver();
             }
@@ -255,42 +245,32 @@ function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft)
     );
 }
 
-// --- NUEVA FUNCIÓN: REINICIAR EL JUEGO ---
+// FUNCION PARA REINICIAR (IMPORTANTE)
 function ReiniciarJuego() {
-    // 1. Ocultar Game Over y resetear estado del dino
-    gameOver.style.display = "none";
-    dino.classList.remove("dino-estrellado");
-    dino.classList.add("dino-corriendo");
+    // Limpiar variables
+    score = 0;
+    gameVel = 1;
+    textoScore.innerText = score;
     parado = false;
     saltando = false;
-
-    // 2. Resetear variables de juego
-    score = 0;
-    textoScore.innerText = score;
-    gameVel = 1;
-    velY = 0;
+    tiempoHastaObstaculo = 2;
+    
+    // Limpiar pantalla
+    gameOver.style.display = "none";
+    contenedor.classList.remove("mediodia", "tarde", "noche");
+    dino.classList.remove("dino-estrellado");
+    dino.classList.add("dino-corriendo");
+    
+    // Resetear posición Dino
     dinoPosY = sueloY;
+    velY = 0;
     dino.style.bottom = dinoPosY + "px";
     
-    // 3. Quitar clases de fondo (volver al inicio)
-    contenedor.classList.remove("mediodia", "tarde", "noche");
-
-    // 4. LIMPIEZA IMPORTANTE: Eliminar todos los obstáculos y nubes del HTML
-    // Iteramos hacia atrás para eliminar elementos del array mientras lo recorremos
-    for(let i = obstaculos.length - 1; i >= 0; i--) {
-        obstaculos[i].remove(); // Elimina del HTML
-    }
-    obstaculos = []; // Vacía el array JS
-
-    for(let i = nubes.length - 1; i >= 0; i--) {
-        nubes[i].remove();
-    }
+    // BORRAR OBSTACULOS VIEJOS
+    obstaculos.forEach(obs => obs.remove());
+    obstaculos = [];
+    
+    // BORRAR NUBES VIEJAS
+    nubes.forEach(nube => nube.remove());
     nubes = [];
-
-    // 5. Resetear temporizadores
-    tiempoHastaObstaculo = 2.5;
-    tiempoHastaNube = 0.5;
-
-    // El bucle Loop() sigue corriendo, así que al poner parado=false,
-    // el Update volverá a ejecutar la lógica en el siguiente frame.
 }
