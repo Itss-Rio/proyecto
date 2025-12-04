@@ -32,7 +32,7 @@
     bottom: 22px;
     left: 42px;
     z-index: 2;
-    background: url(img/dino.png) repeat-x 0px 0px;
+    background: url(../Imagenes//dino.png) repeat-x 0px 0px;
     background-size: 336px 84px;
 }
 
@@ -50,7 +50,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background: url(img/suelo.png) repeat-x 0px 0px;
+    background: url(../Imagenes//suelo.png) repeat-x 0px 0px;
     background-size: 50% 42px;
 }
 
@@ -61,13 +61,13 @@
     bottom: 16px;
     left: 600px;
     z-index: 1;
-    background: url(img/cactus1.png) no-repeat;
+    background: url(../Imagenes//cactus1.png) no-repeat;
 }
 
 .cactus2 {
     width: 98px;
     height: 66px;
-    background: url(img/cactus2.png) no-repeat;
+    background: url(../Imagenes//cactus2.png) no-repeat;
 }
 
 .nube {
@@ -75,7 +75,7 @@
     height: 26px;
     position: absolute;
     z-index: 0;
-    background: url(img/nube.png) no-repeat;
+    background: url(../Imagenes/nube.png) no-repeat;
     background-size: 92px 26px;
 }
 
