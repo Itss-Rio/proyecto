@@ -212,21 +212,20 @@ main {
 /* ===================== */
 /* === 6. ANIMACIONES === */
 /* ===================== */
+@keyframes animarDino {
+    /* Comienza en el primer frame de carrera */
+    from { background-position-x: -84px; } 
+    /* Termina justo antes del frame de estrellado (-252px) */
+    to { background-position-x: -168px; } 
+}
 
+/* El resto de la animación se mantiene igual */
 .dino-corriendo { 
-    /* steps(2) se mantiene, pero asegúrate de que la velocidad sea correcta */
     animation: animarDino 0.25s steps(2) infinite; 
 }
-.dino-estrellado { 
-    /* El frame del dino estrellado está en la posición -252px del sprite */
-    background-position-x: -252px; 
-    /* Detiene la animación de correr cuando se estrella */
-    animation: none;
-}
 
-@keyframes animarDino {
-    /* El primer frame de correr */
-    from { background-position-x: -84px; }
-    /* El último frame de correr antes de repetir el ciclo */
-    to { background-position-x: -168px; } /* Corregido: Si solo hay 2 frames de correr (84 y 168) */
+/* Y el estilo para cuando se estrella sigue apuntando al -252px */
+.dino-estrellado { 
+    background-position-x: -252px; 
+    animation: none;
 }
