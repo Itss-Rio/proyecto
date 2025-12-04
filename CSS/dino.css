@@ -1,15 +1,13 @@
-/* ESTRUCTURA DEL JUEGO */
+/* ESTRUCTURA DEL JUEGO - DUPLICADO EL TAMAÑO */
 .contenedor {
+    /* Original: 920px x 280px */
     width: 1840px; 
     height: 560px;
     margin: 0 auto;
     position: relative;
-    overflow: hidden; /* Esto oculta lo que se salga del cuadro */
+    overflow: hidden; 
     
-    /* Fondo oscuro inicial */
     background: linear-gradient(#232323, #0d0d0d);
-    
-    /* Bordes Neón */
     border: 3px solid #6c5ce7;
     border-radius: 12px;
     box-shadow: 0 0 25px #6c5ce7, 0 0 50px #00ffc8;
@@ -27,25 +25,25 @@
     right: 15px;
     z-index: 10;
     color: #00ffc8;
-    font-family: 'Press Start 2P', cursive; /* Fuente pixelada */
+    font-family: 'Press Start 2P', cursive;
     font-size: 30px;
     text-shadow: 0 0 10px #00ffc8;
 }
 
 .game-over {
-    display: none; /* Oculto por defecto */
+    display: none; 
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 220px; /* Centrado verticalmente */
+    top: 220px; /* Ajuste para centrar en la nueva altura (560px) */
     color: #ff00ff;
-    font-size: 80px;
+    font-size: 80px; /* Tamaño del texto escalado */
     font-family: 'Press Start 2P', cursive;
     text-shadow: 0 0 10px #ff00ff, 0 0 25px #6c5ce7;
     z-index: 20;
 }
 
-/* SPRITES (IMÁGENES) - RUTAS CORREGIDAS */
+/* SPRITES (IMÁGENES) - RUTAS CORRECTAS */
 
 .suelo {
     width: 200%;
@@ -53,7 +51,6 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    /* Ruta corregida: sube a PROYECTO y baja a Imagenes */
     background: url('../Imagenes/suelo.png') repeat-x 0px 0px;
     background-size: 50% 42px;
     z-index: 3;
@@ -63,7 +60,7 @@
     width: 84px;
     height: 84px;
     position: absolute;
-    bottom: 22px; /* Justo encima del suelo */
+    bottom: 44px; /* Ajuste: El dino debe estar sobre el nuevo suelo (22px * 2) */
     left: 42px;
     z-index: 2;
     background: url('../Imagenes/dino.png') repeat-x 0px 0px; 
@@ -74,7 +71,7 @@
     width: 46px;
     height: 96px;
     position: absolute;
-    bottom: 16px;
+    bottom: 32px; /* Ajuste: Obstáculo sobre el nuevo suelo (16px * 2) */
     left: 600px;
     z-index: 1;
     background: url('../Imagenes/cactus1.png') no-repeat;

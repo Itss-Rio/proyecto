@@ -24,10 +24,11 @@ function Loop() {
 
 //****** GAME LOGIC ********//
 
-var sueloY = 22;
+// AJUSTES DE FÍSICA ESCALADOS AL DOBLE
+var sueloY = 44; // Original era 22 (x2)
 var velY = 0;
-var impulso = 900;
-var gravedad = 2500;
+var impulso = 1800; // Original era 900 (x2)
+var gravedad = 5000; // Original era 2500 (x2)
 
 var dinoPosX = 42;
 var dinoPosY = sueloY; 
@@ -43,14 +44,14 @@ var saltando = false;
 var tiempoHastaObstaculo = 2;
 var tiempoObstaculoMin = 0.7;
 var tiempoObstaculoMax = 1.8;
-var obstaculoPosY = 16;
+var obstaculoPosY = 32; // Original era 16 (x2)
 var obstaculos = [];
 
 var tiempoHastaNube = 0.5;
 var tiempoNubeMin = 0.7;
 var tiempoNubeMax = 2.7;
-var maxNubeY = 270;
-var minNubeY = 100;
+var maxNubeY = 540; // Original era 270 (x2)
+var minNubeY = 200; // Original era 100 (x2)
 var nubes = [];
 var velNube = 0.5;
 
@@ -84,7 +85,7 @@ function Update() {
 }
 
 function HandleKeyDown(ev){
-    if(ev.keyCode == 32){ // Barra espaciadora
+    if(ev.keyCode == 32){ 
         Saltar();
     }
 }
@@ -150,9 +151,13 @@ function CrearObstaculo() {
     if(Math.random() > 0.5) obstaculo.classList.add("cactus2");
     obstaculo.posX = contenedor.clientWidth;
     obstaculo.style.left = contenedor.clientWidth+"px";
+    // Ajustamos la posición vertical del obstáculo
+    obstaculo.style.bottom = obstaculoPosY + "px"; 
 
     obstaculos.push(obstaculo);
-    tiempoHastaObstaculo = tiempoObstaculoMin + Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
+    tiempoHastaObstaculo =
+        tiempoObstaculoMin +
+        Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
 }
 
 function CrearNube() {
@@ -164,7 +169,9 @@ function CrearNube() {
     nube.style.bottom = minNubeY + Math.random() * (maxNubeY-minNubeY)+"px";
     
     nubes.push(nube);
-    tiempoHastaNube = tiempoNubeMin + Math.random() * (tiempoNubeMax - tiempoNubeMin) / velNube;
+    tiempoHastaNube =
+        tiempoNubeMin +
+        Math.random() * (tiempoNubeMax - tiempoNubeMin) / gameVel;
 }
 
 function MoverObstaculos() {
@@ -195,12 +202,15 @@ function MoverNubes() {
 function GanarPuntos() {
     score++;
     textoScore.innerText = score;
+
     if(score == 5){
         gameVel = 1.5;
         contenedor.classList.add("mediodia");
+
     } else if(score == 10){
         gameVel = 2;
         contenedor.classList.add("tarde");
+
     } else if(score == 20){
         gameVel = 3;
         contenedor.classList.add("noche");
@@ -215,9 +225,9 @@ function GameOver() {
 function DetectarColision() {
     for (var i = 0; i < obstaculos.length; i++) {
         if(obstaculos[i].posX > dinoPosX + dino.clientWidth) {
-            // Optimización: si el obstáculo está lejos, no comprobamos colisión exacta
-            break; 
+            break;
         }else{
+            // Nota: Los valores de padding se mantienen porque dependen del tamaño del sprite, no del escenario.
             if(IsCollision(dino, obstaculos[i], 10, 30, 15, 20)) {
                 GameOver();
             }
