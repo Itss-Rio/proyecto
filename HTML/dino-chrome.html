@@ -3,33 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jugar a Dino Chrome </title>
-    <link rel="stylesheet" href="../CSS/formato1.css">
-    <script src="../JavaScript/script-dino.js"></script>
+    <title>Dino Chrome - Neon Edition</title>
+
+    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="../Imagenes/maquina-arcade.webp">
+
+    <!-- CSS general + CSS del juego -->
+    <link rel="stylesheet" href="../CSS/formato1.css"> 
+    <link rel="stylesheet" href="../CSS/dino.css"> 
 </head>
-<body style="zoom: 0.975;">
+<body>
 
-    <header>
-        <h1>🦖 Dino Run 🌵</h1>
-    </header>
+<header>
+    <h1>DINO CHROME </h1>
+</header>
 
-    <main>
-        <article class="juego-container">
-            <h2>¡A saltar esos cactus!</h2>
-            
-            <div id="game-area-dino" style="width: 700px; height: 250px; background-color: #333; border: 4px solid #6c5ce7; margin: 20px auto; display: flex; justify-content: center; align-items: center; border-radius: 10px;">
-                <p style="color: white; font-size: 1.5em;">In Progress :]</p>
-            </div>
-            
-            <a class="boton-jugar" href="main.html">Volver al Inicio</a>
-        </article>
-    </main>
+<main>
+    <div class="juego selected">
+        <h2>Dino Runner </h2>
 
-    <footer>
-        <p>© 2025 MiniGames | Contacto: minigames@minigames.com</p>
-    </footer>
+        <!-- Contenedor del juego -->
+        <div class="contenedor">
+            <div class="suelo"></div>
+            <div class="dino dino-corriendo"></div>
+            <div class="score">0</div>
+        </div>
 
-    </body>
+        <div class="game-over">GAME OVER</div>
+
+    </div>
+</main>
+
+    <script src="../JavaScript/script-dino.js"></script>
+
+</body>
 </html>
