@@ -1,7 +1,7 @@
 /* ESTRUCTURA DEL JUEGO */
 .contenedor {
-    width: 920px;
-    height: 280px;
+    width: 1840px; 
+    height: 560px;
     margin: 0 auto;
     position: relative;
     overflow: hidden; /* Esto oculta lo que se salga del cuadro */
@@ -37,9 +37,9 @@
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 100px; /* Centrado verticalmente */
+    top: 220px; /* Centrado verticalmente */
     color: #ff00ff;
-    font-size: 40px;
+    font-size: 80px;
     font-family: 'Press Start 2P', cursive;
     text-shadow: 0 0 10px #ff00ff, 0 0 25px #6c5ce7;
     z-index: 20;
