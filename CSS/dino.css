@@ -1,7 +1,7 @@
-/* --- ESTRUCTURA PRINCIPAL (TAMAÑO GRANDE) --- */
+/* --- ESTRUCTURA PRINCIPAL (TAMAÑO MÁS ANCHO Y BAJO) --- */
 .contenedor {
-    width: 1200px; /* Ancho más manejable */
-    height: 500px; /* Alto duplicado aprox */
+    width: 1400px; /* Más ancho para sensación de carrera */
+    height: 400px; /* Menos alto */
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -14,7 +14,7 @@
     box-shadow: 0 0 25px #6c5ce7;
 }
 
-/* --- FONDOS DE CIELO (Se activan con puntos) --- */
+/* --- FONDOS DE CIELO --- */
 .mediodia { background: linear-gradient(to bottom, #4facfe, #00f2fe); }
 .tarde    { background: linear-gradient(to bottom, #fa709a, #fee140); }
 .noche    { background: linear-gradient(to bottom, #1e3c72, #2a5298); }
@@ -22,12 +22,12 @@
 /* --- MARCADOR Y TEXTOS --- */
 .score {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 15px;
+    right: 25px;
     z-index: 10;
     color: #00ffc8;
     font-family: 'Press Start 2P', monospace;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .game-over {
@@ -35,7 +35,7 @@
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 50%; /* Centrado perfecto */
+    top: 50%; 
     transform: translateY(-50%);
     color: #ff00ff;
     font-size: 50px;
@@ -51,10 +51,10 @@
     margin-top: 15px;
 }
 
-/* --- ELEMENTOS DEL JUEGO --- */
+/* --- ELEMENTOS DEL JUEGO (Posición vertical ajustada al suelo de 50px) --- */
 .suelo {
     width: 200%;
-    height: 50px; /* Suelo un poco más grueso */
+    height: 50px; 
     position: absolute;
     bottom: 0;
     left: 0;
@@ -67,7 +67,7 @@
     width: 84px;
     height: 84px;
     position: absolute;
-    bottom: 50px; /* Apoyado justo sobre el suelo de 50px */
+    bottom: 50px; /* Base del dino sobre el suelo de 50px */
     left: 50px;
     z-index: 2;
     background: url('../Imagenes/dino.png') repeat-x 0px 0px; 
@@ -78,8 +78,8 @@
     width: 46px;
     height: 96px;
     position: absolute;
-    bottom: 50px; /* Alineado al suelo */
-    left: 1200px; /* Fuera de pantalla a la derecha */
+    bottom: 50px; /* Base del cactus sobre el suelo de 50px */
+    left: 1400px; 
     z-index: 1;
     background: url('../Imagenes/cactus1.png') no-repeat;
 }
@@ -99,7 +99,7 @@
     background-size: 92px 26px;
 }
 
-/* --- ANIMACIONES --- */
+/* ANIMACIONES */
 .dino-corriendo { animation: animarDino 0.25s steps(2) infinite; }
 .dino-estrellado { background-position-x: -252px; }
 

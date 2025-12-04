@@ -24,11 +24,11 @@ function Loop() {
 
 //****** LÓGICA DEL JUEGO ********//
 
-// FÍSICA AJUSTADA (Para que no flote tanto)
-var sueloY = 50; // Debe coincidir con el height del .suelo en CSS
+// --- FÍSICA AÚN MÁS AJUSTADA ---
+var sueloY = 50; 
 var velY = 0;
-var impulso = 1400; // REDUCIDO: Salta menos bestia
-var gravedad = 4500; // AUMENTADO: Cae más rápido
+var impulso = 1200; // REDUCIDO para salto más bajo
+var gravedad = 5000; // AUMENTADO para caída más rápida
 
 var dinoPosX = 50;
 var dinoPosY = sueloY; 
@@ -42,7 +42,7 @@ var parado = false;
 var saltando = false;
 
 // OBSTÁCULOS
-var tiempoHastaObstaculo = 2; // Espera 2 seg al inicio
+var tiempoHastaObstaculo = 2;
 var tiempoObstaculoMin = 0.7;
 var tiempoObstaculoMax = 1.8;
 var obstaculoPosY = 50; // Alineado al suelo
@@ -52,8 +52,8 @@ var obstaculos = [];
 var tiempoHastaNube = 0.5;
 var tiempoNubeMin = 0.7;
 var tiempoNubeMax = 2.7;
-var maxNubeY = 450;
-var minNubeY = 200;
+var maxNubeY = 350; // Ajustado a la nueva altura de 400px
+var minNubeY = 150; // Ajustado a la nueva altura
 var nubes = [];
 var velNube = 0.5;
 
@@ -71,12 +71,11 @@ function Start() {
     textoScore = document.querySelector(".score");
     dino = document.querySelector(".dino");
     
-    // Escuchar teclas
     document.addEventListener("keydown", HandleKeyDown);
 }
 
 function Update() {
-    if(parado) return; // Si perdió, congelar todo
+    if(parado) return; 
     
     MoverDinosaurio();
     MoverSuelo();
@@ -207,12 +206,10 @@ function GanarPuntos() {
     score++;
     textoScore.innerText = score;
     
-    // Cambiar fondos
     if(score == 10) contenedor.classList.add("mediodia");
     else if(score == 25) contenedor.classList.add("tarde");
     else if(score == 50) contenedor.classList.add("noche");
     
-    // Aumentar velocidad poco a poco
     if(score % 5 == 0) gameVel += 0.1;
 }
 
@@ -245,9 +242,7 @@ function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft)
     );
 }
 
-// FUNCION PARA REINICIAR (IMPORTANTE)
 function ReiniciarJuego() {
-    // Limpiar variables
     score = 0;
     gameVel = 1;
     textoScore.innerText = score;
@@ -255,13 +250,11 @@ function ReiniciarJuego() {
     saltando = false;
     tiempoHastaObstaculo = 2;
     
-    // Limpiar pantalla
     gameOver.style.display = "none";
     contenedor.classList.remove("mediodia", "tarde", "noche");
     dino.classList.remove("dino-estrellado");
     dino.classList.add("dino-corriendo");
     
-    // Resetear posición Dino
     dinoPosY = sueloY;
     velY = 0;
     dino.style.bottom = dinoPosY + "px";
