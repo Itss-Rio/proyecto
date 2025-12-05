@@ -213,12 +213,19 @@ main {
 /* === 6. ANIMACIONES === */
 /* ===================== */
 @keyframes animarDino {
-    /* Comienza en el primer frame de carrera */
-    from { background-position-x: -84px; } 
-    /* Termina justo antes del frame de estrellado (-252px) */
-    to { background-position-x: -168px; } 
+    /* Comienza en el primer frame de carrera (suponiendo -84px) */
+    0% {
+        background-position-x: -84px;
+    } 
+    /* Muestra el siguiente frame de carrera (suponiendo -126px) */
+    50% { 
+        background-position-x: -126px;
+    }
+    /* Vuelve al primer frame de carrera para repetir el ciclo (suponiendo -84px) */
+    100% {
+        background-position-x: -84px;
+    } 
 }
-
 /* El resto de la animación se mantiene igual */
 .dino-corriendo { 
     animation: animarDino 0.25s steps(2) infinite; 
