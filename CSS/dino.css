@@ -1,11 +1,11 @@
-/* ======================================================= */
-/* === 1. VARIABLES GLOBALES (Para fácil mantenimiento) === */
-/* ======================================================= */
+
+/*  1. VARIABLES GLOBALES (Para fácil mantenimiento)  */
+
 :root {
     /* Dimensiones principales */
     --ancho-contenedor: 1400px;
     --altura-contenedor: 400px;
-    --altura-suelo: 50px;
+    --altura-suelo: 55px;
     
     /* Colores temáticos */
     --color-borde-principal: #6c5ce7;
@@ -17,9 +17,9 @@
     --fondo-cielo-default: linear-gradient(to bottom, #232323, #0d0d0d);
 }
 
-/* ======================================= */
-/* === 2. ESTILOS GLOBALES Y DE PÁGINA === */
-/* ======================================= */
+
+/*  2. ESTILOS GLOBALES Y DE PÁGINA  */
+
 body {
     background-color: #0a0a0a; /* Fondo oscuro sólido */
     color: #fff;
@@ -79,9 +79,7 @@ main {
 }
 
 
-/* ========================================= */
-/* === 3. ESTRUCTURA PRINCIPAL DEL JUEGO === */
-/* ========================================= */
+/*  3. ESTRUCTURA PRINCIPAL DEL JUEGO  */
 
 .contenedor {
     width: var(--ancho-contenedor); 
@@ -104,9 +102,7 @@ main {
 .noche    { background: linear-gradient(to bottom, #1e3c72, #2a5298); }
 
 
-/* =========================== */
-/* === 4. MARCADOR Y TEXTOS === */
-/* =========================== */
+/*  4. MARCADOR Y TEXTOS  */
 
 .score {
     position: absolute;
@@ -145,9 +141,7 @@ main {
 }
 
 
-/* ============================== */
-/* === 5. ELEMENTOS DEL JUEGO === */
-/* ============================== */
+/*  5. ELEMENTOS DEL JUEGO  */
 
 /* Suelo: Se usa la variable --altura-suelo */
 .suelo {
@@ -209,26 +203,27 @@ main {
 }
 
 
-/* ===================== */
-/* === 6. ANIMACIONES === */
-/* ===================== */
+/*  6. ANIMACIONES  */
 @keyframes animarDino {
-    /* Comienza en el primer frame de carrera (suponiendo -84px) */
+    /* Frame de Carrera 1 */
     0% {
-        background-position-x: -64px;
+        background-position-x: -84px;
     } 
-    /* Muestra el siguiente frame de carrera (suponiendo -126px) */
+    /* Frame de Carrera 2 */
     50% { 
-        background-position-x: -176px;
+        background-position-x: -126px;
     }
-    /* Vuelve al primer frame de carrera para repetir el ciclo (suponiendo -84px) */
+    /* Volver al Frame 1 para repetir el ciclo sin saltos visuales */
     100% {
-        background-position-x: -64px;
+        background-position-x: -84px; 
     } 
 }
-/* El resto de la animación se mantiene igual */
+
 .dino-corriendo { 
-    animation: animarDino 0.25s steps(2) infinite; 
+    /* Duración rápida (0.25s) 
+       Salto instantáneo entre frames (steps(1))
+       Repetición infinita (infinite) */
+    animation: animarDino 0.25s steps(1) infinite; 
 }
 
 /* Y el estilo para cuando se estrella sigue apuntando al -252px */
