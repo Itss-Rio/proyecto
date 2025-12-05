@@ -3,6 +3,7 @@
 
 :root {
     /* Dimensiones principales */
+    -webkit-margin-top-collapse: 100px;
     --ancho-contenedor: 1400px;
     --altura-contenedor: 400px;
     --altura-suelo: 63px;
