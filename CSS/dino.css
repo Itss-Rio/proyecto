@@ -110,8 +110,10 @@ footer {
 }
 
 /* Fondos de hora del día (cambian la variable --fondo-cielo-default en JS) */
+.mañana { background: linear-gradient(to bottom, #63a7e2, #edf49b); }
 .mediodia { background: linear-gradient(to bottom, #4facfe, #00f2fe); }
 .tarde    { background: linear-gradient(to bottom, #fa709a, #fee140); }
+.anochecer    { background: linear-gradient(to bottom, #365aa2, #2a5298); }
 .noche    { background: linear-gradient(to bottom, #1e3c72, #2a5298); }
 
 
