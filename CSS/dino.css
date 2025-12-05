@@ -215,15 +215,15 @@ main {
 @keyframes animarDino {
     /* Comienza en el primer frame de carrera (suponiendo -84px) */
     0% {
-        background-position-x: -84px;
+        background-position-x: -64px;
     } 
     /* Muestra el siguiente frame de carrera (suponiendo -126px) */
     50% { 
-        background-position-x: -126px;
+        background-position-x: -176px;
     }
     /* Vuelve al primer frame de carrera para repetir el ciclo (suponiendo -84px) */
     100% {
-        background-position-x: -84px;
+        background-position-x: -64px;
     } 
 }
 /* El resto de la animación se mantiene igual */
