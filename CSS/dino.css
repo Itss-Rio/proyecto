@@ -3,7 +3,6 @@
 
 :root {
     /* Dimensiones principales */
-    -webkit-margin-top-collapse: 100px;
     --ancho-contenedor: 1400px;
     --altura-contenedor: 400px;
     --altura-suelo: 63px;
@@ -22,6 +21,7 @@
 /*  2. ESTILOS GLOBALES Y DE PÁGINA  */
 
 body {
+    margin-top: 100px;
     background-color: #0a0a0a; /* Fondo oscuro sólido */
     color: #fff;
     font-family: Arial, sans-serif;
