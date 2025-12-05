@@ -63,9 +63,9 @@ main {
 footer {
     margin-top: 50px;
     padding: 25px;
-    background-color: #222;
-    color: #888;
-    border-top: 3px solid #6c5ce7;
+    background-color: #1d1d1d;
+    color: #c9c9c9;
+    border: 3px solid #6c5ce7;
     font-size: 0.9em;
 }
 
