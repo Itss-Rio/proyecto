@@ -27,7 +27,7 @@ function Loop() {
 // --- FÍSICA AJUSTADA (SALTO CORTO Y RÁPIDO) ---
 var sueloY = 50; // La base del juego (altura del suelo en CSS)
 var velY = 0;
-var impulso = 1500; // Impulso de salto (fuerza inicial)
+var impulso = 15000; // Impulso de salto (fuerza inicial)
 var gravedad = 6000; // Fuerza de gravedad (caída rápida)
 
 var dinoPosX = 50;
