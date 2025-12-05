@@ -68,6 +68,7 @@ footer {
     border: 3px solid #6c5ce7;
     border-radius: 10px;
     font-size: 0.9em;
+    box-shadow: 0 0 15px var(--color-borde-principal);
 }
 
 /* Botón "Volver al Inicio" */
