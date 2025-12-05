@@ -172,7 +172,7 @@ main {
     width: 46px;
     height: 96px;
     position: absolute;
-    bottom: var(60); /* Se posiciona encima del suelo */
+    bottom: var(55); /* Se posiciona encima del suelo */
     /* El 'left' debe ser --ancho-contenedor y será movido por JS */
     left: var(--ancho-contenedor); 
     z-index: 1;
