@@ -208,7 +208,7 @@ function GanarPuntos() {
     score++;
     textoScore.innerText = score;
     
-    if(score == 0) contenedor.classList.add("mañana");
+    if(score == 1) contenedor.classList.add("mañana");
     else if(score == 25) contenedor.classList.add("mediodia");
     else if(score == 50) contenedor.classList.add("tarde");
     else if(score == 75) contenedor.classList.add("anochecer");
