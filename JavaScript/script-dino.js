@@ -1,7 +1,7 @@
 //****** GAME LOOP ********//
 
-let time = new Date();
-let deltaTime = 0;
+var time = new Date();
+var deltaTime = 0;
 
 if(document.readyState === "complete" || document.readyState === "interactive"){
     setTimeout(Init, 1);
@@ -25,44 +25,44 @@ function Loop() {
 //****** LÓGICA DEL JUEGO ********//
 
 // --- FÍSICA AJUSTADA (SALTO CORTO Y RÁPIDO) ---
-let sueloY = 50; // La base del juego (altura del suelo en CSS)
-let velY = 0;
-let impulso = 1500; // Impulso de salto (fuerza inicial)
-let gravedad = 6000; // Fuerza de gravedad (caída rápida)
+var sueloY = 50; // La base del juego (altura del suelo en CSS)
+var velY = 0;
+var impulso = 1500; // Impulso de salto (fuerza inicial)
+var gravedad = 6000; // Fuerza de gravedad (caída rápida)
 
-let dinoPosX = 50;
-let dinoPosY = sueloY; 
+var dinoPosX = 50;
+var dinoPosY = sueloY; 
 
-let sueloX = 0;
-let velEscenario = 1800/3; // Aumentada para una pantalla de 1400px para sentir más velocidad
-let gameVel = 1.2; // Velocidad base ligeramente mayor para movimiento inicial
-let score = 0;
+var sueloX = 0;
+var velEscenario = 1800/3; // Aumentada para una pantalla de 1400px para sentir más velocidad
+var gameVel = 1.2; // Velocidad base ligeramente mayor para movimiento inicial
+var score = 0;
 
-let parado = false;
-let saltando = false;
+var parado = false;
+var saltando = false;
 
 // OBSTÁCULOS
-let tiempoHastaObstaculo = 2;
-let tiempoObstaculoMin = 0.7;
-let tiempoObstaculoMax = 1.8;
-let obstaculoPosY = 50; 
-let obstaculos = [];
+var tiempoHastaObstaculo = 2;
+var tiempoObstaculoMin = 0.7;
+var tiempoObstaculoMax = 1.8;
+var obstaculoPosY = 50; 
+var obstaculos = [];
 
 // NUBES
-let tiempoHastaNube = 0.5;
-let tiempoNubeMin = 0.7;
-let tiempoNubeMax = 2.7;
-let maxNubeY = 350; 
-let minNubeY = 150; 
-let nubes = [];
-let velNube = 0.5;
+var tiempoHastaNube = 0.5;
+var tiempoNubeMin = 0.7;
+var tiempoNubeMax = 2.7;
+var maxNubeY = 350; 
+var minNubeY = 150; 
+var nubes = [];
+var velNube = 0.5;
 
 // ELEMENTOS HTML
-let contenedor;
-let dino;
-let textoScore;
-let suelo;
-let gameOver;
+var contenedor;
+var dino;
+var textoScore;
+var suelo;
+var gameOver;
 
 function Start() {
     gameOver = document.querySelector(".game-over");
@@ -155,7 +155,7 @@ function DecidirCrearNubes() {
 }
 
 function CrearObstaculo() {
-    let obstaculo = document.createElement("div");
+    var obstaculo = document.createElement("div");
     contenedor.appendChild(obstaculo);
     obstaculo.classList.add("cactus");
     if(Math.random() > 0.5) obstaculo.classList.add("cactus2");
@@ -168,7 +168,7 @@ function CrearObstaculo() {
 }
 
 function CrearNube() {
-    let nube = document.createElement("div");
+    var nube = document.createElement("div");
     contenedor.appendChild(nube);
     nube.classList.add("nube");
     nube.posX = contenedor.clientWidth; // Aparece desde el borde derecho (1400px)
@@ -180,7 +180,7 @@ function CrearNube() {
 }
 
 function MoverObstaculos() {
-    for (let i = obstaculos.length - 1; i >= 0; i--) {
+    for (var i = obstaculos.length - 1; i >= 0; i--) {
         if(obstaculos[i].posX < -obstaculos[i].clientWidth) {
             obstaculos[i].parentNode.removeChild(obstaculos[i]);
             obstaculos.splice(i, 1);
@@ -193,7 +193,7 @@ function MoverObstaculos() {
 }
 
 function MoverNubes() {
-    for (let i = nubes.length - 1; i >= 0; i--) {
+    for (var i = nubes.length - 1; i >= 0; i--) {
         if(nubes[i].posX < -nubes[i].clientWidth) {
             nubes[i].parentNode.removeChild(nubes[i]);
             nubes.splice(i, 1);
@@ -223,7 +223,7 @@ function GameOver() {
 }
 
 function DetectarColision() {
-    for (let i = 0; i < obstaculos.length; i++) {
+    for (var i = 0; i < obstaculos.length; i++) {
         if(obstaculos[i].posX > dinoPosX + dino.clientWidth) {
             break; 
         }else{
@@ -236,8 +236,8 @@ function DetectarColision() {
 }
 
 function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft) {
-    let aRect = a.getBoundingClientRect();
-    let bRect = b.getBoundingClientRect();
+    var aRect = a.getBoundingClientRect();
+    var bRect = b.getBoundingClientRect();
 
     return !(
         ((aRect.top + aRect.height - paddingBottom) < (bRect.top)) ||
