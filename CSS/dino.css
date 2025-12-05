@@ -169,7 +169,7 @@ main {
 
 /* Cactus: Base de los cactus sobre el suelo (se usa la variable) */
 .cactus {
-    margin-top: 5px;
+    margin-top: 10px;
     width: 46px;
     height: 96px;
     position: absolute;
