@@ -169,11 +169,10 @@ main {
 
 /* Cactus: Base de los cactus sobre el suelo (se usa la variable) */
 .cactus {
-    margin-top: 10px;
     width: 46px;
     height: 96px;
     position: absolute;
-    bottom: var(--altura-suelo); /* Se posiciona encima del suelo */
+    bottom: var(60); /* Se posiciona encima del suelo */
     /* El 'left' debe ser --ancho-contenedor y será movido por JS */
     left: var(--ancho-contenedor); 
     z-index: 1;
