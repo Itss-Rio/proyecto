@@ -221,7 +221,7 @@ footer {
 /*  6. ANIMACIONES  */
 @keyframes animarDino {
     0% {
-        background-position-x: -88px;
+        background-position-x: -68px;
     } 
     100% { 
         background-position-x: -124px;
