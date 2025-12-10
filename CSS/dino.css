@@ -223,6 +223,9 @@ footer {
     0% {
         background-position-x: -0px;
     } 
+        0% {
+        background-position-x: -74px;
+    } 
     100% { 
         background-position-x: -124px;
     }
