@@ -220,18 +220,30 @@ footer {
 
 /*  6. ANIMACIONES  */
 .dino-corriendo {
-    width: 44px;
+    /* El contenedor debe ser del tamaño exacto de una celda: 44x47 */
+    width: 44px; 
     height: 47px;
-    background-image: url('../Imagenes/dino.png');
-    /* Empezamos en el segundo frame (-44px) */
-    background-position-x: -44px; 
-    /* Saltamos solo entre 2 frames */
-    animation: correr 0.2s steps(2) infinite;
+    background-image: url('dino.png');
+    background-repeat: no-repeat;
+    
+    /* Configuración de la animación:
+       - Nombre: correr
+       - Duración: 0.15s (rápido para correr)
+       - Función: steps(2) (solo 2 pasos: Pata 1 y Pata 2)
+       - Repetición: infinite
+    */
+    animation: correr 0.15s steps(2) infinite;
 }
 
 @keyframes correr {
-    from { background-position-x: -44px; }
-    to { background-position-x: -132px; } /* Final del tercer frame */
+    /* Desde el inicio del segundo frame */
+    from { 
+        background-position-x: -44px; 
+    }
+    /* Hasta el inicio del cuarto frame (que es donde acaba el tercero) */
+    to { 
+        background-position-x: -132px; 
+    }
 }
 
 /* Y el estilo para cuando se estrella sigue apuntando al -252px */
