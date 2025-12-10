@@ -222,7 +222,7 @@ footer {
 .dino-corriendo {
     width: 44px;
     height: 47px;
-    background-image: url('dino.png');
+    background-image: url('../Imagenes/dino.png');
     /* Empezamos en el segundo frame (-44px) */
     background-position-x: -44px; 
     /* Saltamos solo entre 2 frames */
