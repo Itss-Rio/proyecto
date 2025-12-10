@@ -224,10 +224,10 @@ footer {
         background-position-x: -0px;
     } 
         0% {
-        background-position-x: -74px;
+        background-position-x: -124px;
     } 
     100% { 
-        background-position-x: -124px;
+        background-position-x: -74px;
     }
 }
 
