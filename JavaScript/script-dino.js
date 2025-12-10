@@ -9,12 +9,14 @@ if(document.readyState === "complete" || document.readyState === "interactive"){
     document.addEventListener("DOMContentLoaded", Init); 
 }
 
+ /*Funcion para inicializar los elementos del juego*/
 function Init() {
     time = new Date();
     Start();
     Loop();
 }
 
+ /*Funcion para ejecutar el bucle principal del juego*/
 function Loop() {
     deltaTime = (new Date() - time) / 1000;
     time = new Date();
@@ -64,6 +66,7 @@ var textoScore;
 var suelo;
 var gameOver;
 
+/*Funcion para inicializar los elementos del juego*/
 function Start() {
     gameOver = document.querySelector(".game-over");
     suelo = document.querySelector(".suelo");
@@ -74,6 +77,7 @@ function Start() {
     document.addEventListener("keydown", HandleKeyDown);
 }
 
+/*Funcion para actualizar el estado del juego en cada frame*/
 function Update() {
     if(parado) return; 
     
@@ -89,6 +93,7 @@ function Update() {
     velY -= gravedad * deltaTime;
 }
 
+/*Funcion para manejar la pulsación de teclas*/
 function HandleKeyDown(ev){
     if(ev.keyCode == 32){ // ESPACIO
         if(parado){
@@ -99,6 +104,7 @@ function HandleKeyDown(ev){
     }
 }
 
+/*Funcion para que el dinosaurio salte*/
 function Saltar(){
     if(dinoPosY === sueloY){
         saltando = true;
@@ -107,6 +113,7 @@ function Saltar(){
     }
 }
 
+/*Funcion para mover el dinosaurio en el eje Y*/
 function MoverDinosaurio() {
     dinoPosY += velY * deltaTime;
     if(dinoPosY < sueloY){
@@ -115,6 +122,7 @@ function MoverDinosaurio() {
     dino.style.bottom = dinoPosY + "px";
 }
 
+/*Funcion para detectar cuando el dino toca el suelo y ajustar su estado*/
 function TocarSuelo() {
     dinoPosY = sueloY;
     velY = 0;
@@ -123,30 +131,30 @@ function TocarSuelo() {
     }
     saltando = false;
 }
-
+/*Funcion para que el suelo se mueva y cree la ilusión de desplazamiento*/
 function MoverSuelo() {
     sueloX += CalcularDesplazamiento();
     // Usamos contenedor.clientWidth (1400px) para asegurar que el suelo se repita correctamente
     suelo.style.left = -(sueloX % contenedor.clientWidth) + "px";
 }
-
+/*Funcion para poder calcular como debe moverse las cosas en el escenario para cuadrar todo*/
 function CalcularDesplazamiento() {
     return velEscenario * deltaTime * gameVel;
 }
-
+/*Funcion utilizada para manejar la colision del dino con un obstaculo y asi poder tener posteriormente la animacion y la forma de derrota*/
 function Estrellarse() {
     dino.classList.remove("dino-corriendo");
     dino.classList.add("dino-estrellado");
     parado = true;
 }
-
+/*Funcion que hace o decide cuando debe crearse un obstaculo*/
 function DecidirCrearObstaculos() {
     tiempoHastaObstaculo -= deltaTime;
     if(tiempoHastaObstaculo <= 0) {
         CrearObstaculo();
     }
 }
-
+/*Funcion que hace o decide cuando debe crearse una nube, y este es utilizado para forzar a crear una nube*/
 function DecidirCrearNubes() {
     tiempoHastaNube -= deltaTime;
     if(tiempoHastaNube <= 0) {
@@ -154,6 +162,7 @@ function DecidirCrearNubes() {
     }
 }
 
+/*Funcion utilizada para que los obstaculos se puedan ir creando*/
 function CrearObstaculo() {
     var obstaculo = document.createElement("div");
     contenedor.appendChild(obstaculo);
@@ -167,6 +176,7 @@ function CrearObstaculo() {
     tiempoHastaObstaculo = tiempoObstaculoMin + Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
 }
 
+/*Funcion utilizada para que las nubes se puedan ir creando*/
 function CrearNube() {
     var nube = document.createElement("div");
     contenedor.appendChild(nube);
@@ -179,6 +189,7 @@ function CrearNube() {
     tiempoHastaNube = tiempoNubeMin + Math.random() * (tiempoNubeMax - tiempoNubeMin) / velNube;
 }
 
+/*Duncion utilizada para que los obstaculos se muevan segun como se mueve el escenario / Dino*/
 function MoverObstaculos() {
     for (var i = obstaculos.length - 1; i >= 0; i--) {
         if(obstaculos[i].posX < -obstaculos[i].clientWidth) {
@@ -191,7 +202,7 @@ function MoverObstaculos() {
         }
     }
 }
-
+/*Aqui tenemos una forma de ver como es que las nubes estan moviendose*/
 function MoverNubes() {
     for (var i = nubes.length - 1; i >= 0; i--) {
         if(nubes[i].posX < -nubes[i].clientWidth) {
@@ -207,7 +218,9 @@ function MoverNubes() {
 function GanarPuntos() {
     score++;
     textoScore.innerText = score;
-    
+    /* Lo que esta pasando aquí es que al alcanzar ciertos puntajes,
+    se añade una clase específica al contenedor para cambiar el fondo.
+    Esto crea la ilusión de que el juego avanza a diferentes momentos del día. */
     if(score == 10) contenedor.classList.add("mañana");
     else if(score == 25) contenedor.classList.add("mediodia");
     else if(score == 50) contenedor.classList.add("tarde");
@@ -216,7 +229,8 @@ function GanarPuntos() {
     
     if(score % 5 == 0) gameVel += 0.1;
 }
-
+/*Condicion que tenemos para que e juego termine 
+  En este caso tenemos que Estrellarnos*/
 function GameOver() {
     Estrellarse();
     gameOver.style.display = "block";
@@ -235,6 +249,7 @@ function DetectarColision() {
     }
 }
 
+    /*Funcion para detectar colisiones entre dos elementos con padding ajustable*/
 function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft) {
     var aRect = a.getBoundingClientRect();
     var bRect = b.getBoundingClientRect();
@@ -247,6 +262,7 @@ function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft)
     );
 }
 
+ /*Funcion para reiniciar el juego*/
 function ReiniciarJuego() {
     score = 0;
     gameVel = 1.2; // Reiniciar a la velocidad base ajustada

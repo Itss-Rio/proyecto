@@ -38,6 +38,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let game = null;
     let running = false;
 
+    /*Funcion para generar una posición aleatoria para la comida*/
     function randomFood() {
         return {
             x: Math.floor(Math.random() * (canvas.width / box)) * box,
@@ -96,6 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
     });
 
+    /*Funcion para iniciar o pausar el juego*/
     function toggleGame() {
         if (running) {
             clearInterval(game);
@@ -106,6 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /*Funcion para dibujar la cuadrícula del juego*/
     function drawGrid() {
         ctx.strokeStyle = '#006600';
         for(let x=0; x<canvas.width; x+=box){
@@ -122,6 +125,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /*Funcion principal para dibujar el juego*/
     function draw() {
         // Fondo y grid
         ctx.fillStyle = "#004d00";
@@ -148,6 +152,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let headX = snake[0].x;
         let headY = snake[0].y;
 
+        /*Funcion para manejar el movimiento de la serpiente*/
         switch (direction){
             case "LEFT":
                 headX -= box;
@@ -202,6 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
         ctx.shadowBlur = 0;
     }
 
+    /*Funcion para reiniciar el juego*/
     function resetGame() {
         snake = [{ x: 200, y: 200 }];
         direction = "RIGHT";
@@ -209,6 +215,7 @@ window.addEventListener("DOMContentLoaded", () => {
         food = randomFood();
     }
 
+    /*Funcion para generar una posición aleatoria para la comida*/
     function randomFood() {
         let newFood;
         let collision;
