@@ -223,12 +223,9 @@ footer {
     0% {
         background-position-x: -88px;
     } 
-    50% { 
+    100% { 
         background-position-x: -124px;
     }
-    100% {
-        background-position-x: -88px; 
-    } 
 }
 
 .dino-corriendo { 
