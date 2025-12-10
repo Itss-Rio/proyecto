@@ -219,19 +219,18 @@ footer {
 
 
 /*  6. ANIMACIONES  */
-/*@keyframes animarDino {
-
+@keyframes animarDino {
     0% {
-        background-position-x: -84px;
+        background-position-x: -44px;
     } 
     50% { 
-        background-position-x: -126px;
+        background-position-x: -88px;
     }
     100% {
-        background-position-x: -84px; 
+        background-position-x: -44px; 
     } 
 }
-*/
+
 .dino-corriendo { 
     /* Duración rápida (0.25s) 
        Salto instantáneo entre frames (steps(1))
