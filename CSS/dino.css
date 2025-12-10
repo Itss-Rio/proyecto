@@ -229,7 +229,7 @@ to {
 }
 .dino-corriendo { 
     /* Duración rápida (0.25s) 
-       Salto instantáneo entre frames (steps(1))
+       Salto instantáneo entre frames (steps(2))
        Repetición infinita (infinite) */
     animation: animarDino 0.25s steps(2) infinite; 
 }
