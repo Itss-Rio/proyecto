@@ -219,21 +219,19 @@ footer {
 
 
 /*  6. ANIMACIONES  */
-@keyframes animarDino {
-    /* Frame de Carrera 1 */
+/*@keyframes animarDino {
+
     0% {
         background-position-x: -84px;
     } 
-    /* Frame de Carrera 2 */
     50% { 
         background-position-x: -126px;
     }
-    /* Volver al Frame 1 para repetir el ciclo sin saltos visuales */
     100% {
         background-position-x: -84px; 
     } 
 }
-
+*/
 .dino-corriendo { 
     /* Duración rápida (0.25s) 
        Salto instantáneo entre frames (steps(1))
