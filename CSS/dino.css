@@ -221,13 +221,13 @@ footer {
 /*  6. ANIMACIONES  */
 @keyframes animarDino {
     0% {
-        background-position-x: -88px;
+        background-position-x: -168px;
     } 
     50% { 
         background-position-x: -124px;
     }
     100% {
-        background-position-x: -88px; 
+        background-position-x: -168px; 
     } 
 }
 
@@ -235,7 +235,7 @@ footer {
     /* Duración rápida (0.25s) 
        Salto instantáneo entre frames (steps(1))
        Repetición infinita (infinite) */
-    animation: animarDino 1.5s steps(1) infinite; 
+    animation: animarDino 0.25s steps(1) infinite; 
 }
 
 /* Y el estilo para cuando se estrella sigue apuntando al -252px */
