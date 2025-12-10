@@ -221,19 +221,19 @@ footer {
 /*  6. ANIMACIONES  */
 @keyframes animarDino {
     0% {
-        background-position-x: -168px;
+        background-position-x: -0px;
     } 
     25% { 
-        background-position-x: -124px;
+        background-position-x: -44px;
     }
     50% {
-        background-position-x: -168px; 
+        background-position-x: -88px; 
     } 
     75% { 
-        background-position-x: -124px;
+        background-position-x: -132px;
     }
     100% {
-        background-position-x: -168px; 
+        background-position-x: -176px; 
     } 
 }
 
