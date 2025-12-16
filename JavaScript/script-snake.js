@@ -1,103 +1,89 @@
+// Espera a que el DOM esté completamente cargado
 window.addEventListener("DOMContentLoaded", () => {
+
+    // CONFIGURACIÓN DEL CANVAS
+
     const gameArea = document.getElementById("game-area-snake");
     const canvas = document.createElement("canvas");
+
+    // Tamaño del área de juego
     canvas.width = 500;
     canvas.height = 500;
     canvas.style.borderRadius = "10px";
+
+    // Limpiar el contenedor y añadir el canvas
     gameArea.innerHTML = "";
     gameArea.appendChild(canvas);
+
+    // Contexto 2D para dibujar
     const ctx = canvas.getContext("2d");
 
-    //Cuadrados
+    // VARIABLES DEL JUEGO
+
+    // Tamaño de cada casilla
     const box = 20;
-    //Spawn inicial
+
+    // Serpiente (empieza con un solo segmento)
     let snake = [{ x: 100, y: 100 }];
+
+    // Dirección inicial aleatoria
     let spawnDIR = Math.floor(Math.random() * 4) + 1;
     let direction;
 
-    // Direccion inicial del snake
-    switch (spawnDIR){
-        case 1:
-            direction = "UP";
-            break;
-
-        case 2:
-            direction = "RIGHT";
-            break;
-
-        case 3:
-            direction = "DOWN";
-            break;
-
-        default:
-            direction = "LEFT";
+    // Asignar dirección inicial
+    switch (spawnDIR) {
+        case 1: direction = "UP"; break;
+        case 2: direction = "RIGHT"; break;
+        case 3: direction = "DOWN"; break;
+        default: direction = "LEFT";
     }
 
+    // Comida inicial
     let food = randomFood();
+
+    // Puntuación
     let score = 0;
+
+    // Control del juego
     let game = null;
     let running = false;
 
-    /*Funcion para generar una posición aleatoria para la comida*/
-    function randomFood() {
-        return {
-            x: Math.floor(Math.random() * (canvas.width / box)) * box,
-            y: Math.floor(Math.random() * (canvas.height / box)) * box
-        };
-    }
+    // CONTROLES DE TECLADO
 
-    // Controles
     document.addEventListener("keydown", (e) => {
-        switch (e.code){
+        switch (e.code) {
+
+            // Pausar / reanudar con espacio
             case "Space":
                 toggleGame();
                 break;
 
-            // Movimiento con flechas
+            // Flechas
             case "ArrowLeft":
-                if (direction === "RIGHT") {break;}
-                direction = "LEFT";
+            case "KeyA":
+                if (direction !== "RIGHT") direction = "LEFT";
                 break;
 
             case "ArrowUp":
-                if (direction === "DOWN") {break;}
-                direction = "UP";
+            case "KeyW":
+                if (direction !== "DOWN") direction = "UP";
                 break;
 
             case "ArrowRight":
-                if (direction === "LEFT") {break;}
-                direction = "RIGHT";
+            case "KeyD":
+                if (direction !== "LEFT") direction = "RIGHT";
                 break;
 
             case "ArrowDown":
-                if (direction === "UP") {break;}
-                direction = "DOWN";
-                break;
-            
-            // Movimiento con letras
-            case "KeyA":
-                if (direction === "RIGHT") {break;}
-                direction = "LEFT";
-                break;
-
-            case "KeyW":
-                if (direction === "DOWN") {break;}
-                direction = "UP";
-                break;
-
-            case "KeyD":
-                if (direction === "LEFT") {break;}
-                direction = "RIGHT";
-                break;
-
             case "KeyS":
-                if (direction === "UP") {break;}
-                direction = "DOWN";
+                if (direction !== "UP") direction = "DOWN";
                 break;
-        };
+        }
     });
 
-    /*Funcion para iniciar o pausar el juego*/
+    
+      // INICIAR / PAUSAR JUEGO
+
     function toggleGame() {
         if (running) {
             clearInterval(game);
@@ -108,38 +94,46 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /*Funcion para dibujar la cuadrícula del juego*/
+    // DIBUJAR LA CUADRÍCULA
+
     function drawGrid() {
-        ctx.strokeStyle = '#006600';
-        for(let x=0; x<canvas.width; x+=box){
+        ctx.strokeStyle = "#006600";
+
+        // Líneas verticales
+        for (let x = 0; x < canvas.width; x += box) {
             ctx.beginPath();
-            ctx.moveTo(x,0);
-            ctx.lineTo(x,canvas.height);
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
             ctx.stroke();
         }
-        for(let y=0; y<canvas.height; y+=box){
+
+        // Líneas horizontales
+        for (let y = 0; y < canvas.height; y += box) {
             ctx.beginPath();
-            ctx.moveTo(0,y);
-            ctx.lineTo(canvas.width,y);
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
             ctx.stroke();
         }
     }
 
-    /*Funcion principal para dibujar el juego*/
+    // FUNCIÓN PRINCIPAL DEL JUEGO
+
+
     function draw() {
-        // Fondo y grid
+
+        // Fondo
         ctx.fillStyle = "#004d00";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         drawGrid();
 
-        // Comida con neón
+        // Dibujar comida (con efecto neón)
         ctx.fillStyle = "red";
         ctx.shadowColor = "#ff0000";
         ctx.shadowBlur = 15;
         ctx.fillRect(food.x, food.y, box, box);
         ctx.shadowBlur = 0;
 
-        // Serpiente con neón
+        // Dibujar serpiente
         for (let i = 0; i < snake.length; i++) {
             ctx.fillStyle = i === 0 ? "#00ffc8" : "#00b38f";
             ctx.shadowColor = "#00ffc8";
@@ -148,40 +142,30 @@ window.addEventListener("DOMContentLoaded", () => {
             ctx.shadowBlur = 0;
         }
 
-        // Movimiento
+        // Posición actual de la cabeza
         let headX = snake[0].x;
         let headY = snake[0].y;
 
-        /*Funcion para manejar el movimiento de la serpiente*/
-        switch (direction){
-            case "LEFT":
-                headX -= box;
-                break;
-            
-            case "UP":
-                headY -= box;
-                break;
-            
-            case "RIGHT":
-                headX += box;
-                break;
-
-            case "DOWN":
-                headY += box;
-                break;
+        // Movimiento según dirección
+        switch (direction) {
+            case "LEFT": headX -= box; break;
+            case "UP": headY -= box; break;
+            case "RIGHT": headX += box; break;
+            case "DOWN": headY += box; break;
         }
 
-        // Comer
+        // Comer comida
         if (headX === food.x && headY === food.y) {
             score++;
             food = randomFood();
         } else {
+            // Eliminar último segmento si no come
             snake.pop();
         }
 
         const newHead = { x: headX, y: headY };
 
-        // Colisiones
+        // Colisiones (pared o consigo misma)
         if (
             headX < 0 || headY < 0 ||
             headX >= canvas.width || headY >= canvas.height ||
@@ -189,6 +173,7 @@ window.addEventListener("DOMContentLoaded", () => {
         ) {
             clearInterval(game);
             running = false;
+
             setTimeout(() => {
                 alert("Perdiste! Puntuación: " + score);
                 resetGame();
@@ -196,9 +181,10 @@ window.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Añadir nueva cabeza
         snake.unshift(newHead);
 
-        // Puntuación con glow
+        // Mostrar puntuación
         ctx.fillStyle = "#00ffc8";
         ctx.font = "16px 'Press Start 2P', monospace";
         ctx.shadowColor = "#00ffc8";
@@ -207,7 +193,8 @@ window.addEventListener("DOMContentLoaded", () => {
         ctx.shadowBlur = 0;
     }
 
-    /*Funcion para reiniciar el juego*/
+    // REINICIAR JUEGO
+
     function resetGame() {
         snake = [{ x: 200, y: 200 }];
         direction = "RIGHT";
@@ -215,17 +202,22 @@ window.addEventListener("DOMContentLoaded", () => {
         food = randomFood();
     }
 
-    /*Funcion para generar una posición aleatoria para la comida*/
+
+//       GENERAR COMIDA ALEATORIA
+
+
     function randomFood() {
         let newFood;
         let collision;
+
         do {
             collision = false;
             newFood = {
                 x: Math.floor(Math.random() * (canvas.width / box)) * box,
                 y: Math.floor(Math.random() * (canvas.height / box)) * box
             };
-            // Revisar si la nueva posición coincide con alguna parte de la serpiente
+
+            // Evitar que aparezca sobre la serpiente
             for (let i = 1; i < snake.length; i++) {
                 if (snake[i].x === newFood.x && snake[i].y === newFood.y) {
                     collision = true;
@@ -233,10 +225,12 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             }
         } while (collision);
+
         return newFood;
     }
 
-    // Mensaje inicial
+      // MENSAJE INICIAL
+
     ctx.fillStyle = "#00ffc8";
     ctx.font = "16px 'Press Start 2P', monospace";
     ctx.shadowColor = "#00ffc8";
@@ -245,7 +239,7 @@ window.addEventListener("DOMContentLoaded", () => {
     ctx.shadowBlur = 0;
 });
 
-    // Deshabilitar el click derecho, para que no molesten mis compañeros en las pruebas
-    document.addEventListener('contextmenu', function(e) {
+// Deshabilitar clic derecho (para evitar molestias en pruebas)
+document.addEventListener("contextmenu", function (e) {
     e.preventDefault();
-    });
+});
