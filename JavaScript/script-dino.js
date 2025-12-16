@@ -189,7 +189,7 @@ function CrearNube() {
     tiempoHastaNube = tiempoNubeMin + Math.random() * (tiempoNubeMax - tiempoNubeMin) / velNube;
 }
 
-/*Duncion utilizada para que los obstaculos se muevan segun como se mueve el escenario / Dino*/
+/*Funcion utilizada para que los obstaculos se muevan segun como se mueve el escenario / Dino*/
 function MoverObstaculos() {
     for (var i = obstaculos.length - 1; i >= 0; i--) {
         if(obstaculos[i].posX < -obstaculos[i].clientWidth) {
