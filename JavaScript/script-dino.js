@@ -1,4 +1,4 @@
-//****** GAME LOOP ********//
+// GAME LOOP
 
 var time = new Date();
 var deltaTime = 0;
@@ -24,9 +24,9 @@ function Loop() {
     requestAnimationFrame(Loop);
 }
 
-//****** LÓGICA DEL JUEGO ********//
+// LÓGICA DEL JUEGO
 
-// --- FÍSICA AJUSTADA (SALTO CORTO Y RÁPIDO) ---
+//  FÍSICA AJUSTADA (SALTO CORTO Y RÁPIDO) 
 var sueloY = 50; // La base del juego (altura del suelo en CSS)
 var velY = 0;
 var impulso = 1500; // Impulso de salto (fuerza inicial)
