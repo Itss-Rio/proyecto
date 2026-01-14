@@ -1,0 +1,25 @@
+{
+  "name": "proyecto",
+  "version": "1.0.0",
+  "description": "<img width=\"1919\" height=\"970\" alt=\"Screenshot_3\" src=\"https://github.com/user-attachments/assets/e8d062d1-bb71-4f9c-aedd-bc184401a4b5\" />",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Itss-Rio/proyecto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Itss-Rio/proyecto/issues"
+  },
+  "homepage": "https://github.com/Itss-Rio/proyecto#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mysql2": "^3.16.0"
+  }
+}
