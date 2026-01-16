@@ -3,7 +3,8 @@ const conexion = mysql.createConnection({
 host: 'localhost',
 user: 'root',
 password: '1234', // mejor poner contraseña
-database: 'ranking'
+database: 'ranking',
+port: 3308
 });
 conexion.connect(err => {
 if (err) {

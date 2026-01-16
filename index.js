@@ -5,6 +5,7 @@ const conexion = mysql.createConnection({
 host: 'localhost',
 user: 'root',
 password: '1234', // mejor poner contraseña
+port: 3308,
 database: 'ranking'
 });
 
@@ -36,34 +37,42 @@ app.post("/register", function(req, res){
 
 
 
-let username = datos.nombre;
+let username = datos.username;
 let email = datos.email;
 let password = datos.password;
 let timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-let register = "INSERT INTO users (username	, email, password, creado_en) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+timestamp+"'";
+let checkEmail = "SELECT * FROM users WHERE email = '"+email+"'";
 
-conexion.query(register, function(error){
+conexion.query(checkEmail, function(error, rows){
     if(error){
         throw error;
-    }else if (email === email){
-        console.log('email existente')
-        res.redirect("/");
-    }else{
-        console.log('Usuario registrado');
-        res.redirect("/");
     }
-});
-});
+
+        if (rows.length > 0){
+            console.log('El email ya existe');
+            res.redirect("/");
+            return;
+        }
+            else{
+            let register = "INSERT INTO users (username, email, password, creado_en) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+timestamp+"')";
+
+                conexion.query(register, function(error){
+                    if(error){
+                        throw error;
+                    }else if (email === email){
+                        console.log('email existente')
+                        res.redirect("/");
+                    }else{
+                        console.log('Usuario registrado');
+                        res.redirect("/");
+                    }
+                });
+        }   
+        });
+    });
 
 
-conexion.connect(err => {
-if (err) {
-console.error('Error conexión:', err.message);
-process.exit(1);
-}
-console.log('Conexión OK con mysql2');
-});
 
 
 
