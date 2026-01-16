@@ -61,9 +61,11 @@ conexion.query(checkEmail, function(error, rows){
                     if(error){
                         throw error;
                     }else if (email === email){
-                        console.log('email existente')
+                        alert('El email ya existe');
+                        console.log('email existente');
                         res.redirect("/");
                     }else{
+                        alert('Usuario registrado');
                         console.log('Usuario registrado');
                         res.redirect("/");
                     }
