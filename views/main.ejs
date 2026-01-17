@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Clásico</title>
+    <link rel="stylesheet" href="/CSS/arcade-style.css">
+    <style>
+        /* Estilos rápidos para arreglar los modales */
+        .modal {
+            display: none; /* Esto hace que el login no se vea al cargar */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: 10% auto;
+            padding: 20px;
+            border: 2px solid var(--neon-cyan);
+            width: 350px;
+            text-align: center;
+        }
+        .modal-content input {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 10px;
+            background: #000;
+            color: #fff;
+            border: 1px solid var(--neon-purple);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ARCADE CLASICO</h1>
+    <div class="nav-user-zone">
+        <% if (user) { %>
+            <span style="color: var(--neon-pink);">USUARIO: <%= user.username.toUpperCase() %></span>
+            <a href="/logout" class="btn-action" style="background: #e74c3c; margin-left: 10px;">SALIR</a>
+        <% } else { %>
+            <button onclick="toggleModal('loginModal')" class="btn-action">ENTRAR</button>
+        <% } %>
+    </div>
+</header>
+
+<main>
+    <div class="juego">
+        <img src="/Imagenes/new-snake.webp" alt="Snake">
+        <h2>SNAKE</h2>
+        <p>Cuanta hambre tiene tu serpiente?</p>
+        <div style="display: flex; gap: 5px; justify-content: center;">
+            <a href="/HTML/snake.html" class="boton-jugar">JUGAR</a>
+            <a href="/ranking/snake" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
+        </div>
+    </div>
+
+    <div class="juego">
+        <img src="/Imagenes/images.jpg" alt="Tetris">
+        <h2>TETRIS</h2>
+        <p>Ordena los bloques antes del colapso.</p>
+        <div style="display: flex; gap: 5px; justify-content: center;">
+            <a href="/HTML/tetris.html" class="boton-jugar">JUGAR</a>
+            <a href="/ranking/tetris" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
+        </div>
+    </div>
+
+    <div class="juego">
+        <img src="/Imagenes/dino-game.png" alt="Dino">
+        <h2>DINO RUN</h2>
+        <p>Salta cactus en el desierto.</p>
+        <div style="display: flex; gap: 5px; justify-content: center;">
+            <a href="/HTML/dino-chrome.html" class="boton-jugar">JUGAR</a>
+            <a href="/ranking/dino" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
+        </div>
+    </div>
+</main>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span onclick="toggleModal('loginModal')" style="float:right; cursor:pointer; color:red;">[X]</span>
+        <h2 style="color: var(--neon-cyan);">LOGIN</h2>
+        <form action="/login" method="POST">
+            <input type="email" name="email" placeholder="EMAIL" required>
+            <input type="password" name="password" placeholder="PASSWORD" required>
+            <button type="submit" class="btn-action" style="width: 100%;">ENTRAR</button>
+        </form>
+        <p style="font-size: 7px; margin-top: 20px;">NO TIENES CUENTA?</p>
+        <button onclick="toggleModal('loginModal'); toggleModal('regModal')" class="btn-action" style="background: var(--neon-pink);">REGISTRARSE</button>
+    </div>
+</div>
+
+<div id="regModal" class="modal">
+    <div class="modal-content">
+        <span onclick="toggleModal('regModal')" style="float:right; cursor:pointer; color:red;">[X]</span>
+        <h2 style="color: var(--neon-pink);">REGISTRO</h2>
+        <form action="/register" method="POST">
+            <input type="text" name="username" placeholder="USERNAME" required>
+            <input type="email" name="email" placeholder="EMAIL" required>
+            <input type="password" name="password" placeholder="PASSWORD" required>
+            <button type="submit" class="btn-action" style="width: 100%; background: var(--neon-pink);">CREAR CUENTA</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleModal(id) {
+        const modal = document.getElementById(id);
+        if (modal.style.display === "block") {
+            modal.style.display = "none";
+        } else {
+            modal.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>

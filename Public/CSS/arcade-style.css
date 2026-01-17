@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --neon-cyan: #00ffc8;
+    --neon-purple: #6c5ce7;
+    --neon-pink: #ff00ff;
+    --dark-bg: #161616;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-bg);
+    color: #e0e0e0;
+    text-align: center;
+    line-height: 1.6;
+    background: radial-gradient(circle at center, #161616, #0d0d0d 70%);
+    overflow-x: hidden;
+    font-size: 10px;
+}
+
+header {
+    background-color: #222;
+    padding: 30px 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    border-bottom: 3px solid var(--neon-purple);
+}
+
+header h1 {
+    margin: 0;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    font-size: 2.2em;
+    letter-spacing: 3px;
+    animation: neonPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+    0% { text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan); }
+    100% { text-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-cyan); }
+}
+
+main {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.juego {
+    position: relative;
+    background-color: #2c2c2c;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    width: 320px;
+    padding-bottom: 25px;
+    overflow: hidden;
+    border: 2px solid var(--neon-purple);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.juego:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.8), 0 0 20px var(--neon-purple);
+    border-color: var(--neon-cyan);
+}
+
+.juego img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 2px solid var(--neon-purple);
+}
+
+.juego h2 {
+    color: var(--neon-cyan);
+    font-size: 1.4em;
+    margin: 20px 0 10px;
+}
+
+.boton-jugar, .btn-action {
+    display: inline-block;
+    background-color: var(--neon-purple);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #4834d4;
+}
+
+.btn-action:hover {
+    background-color: var(--neon-cyan);
+    color: black;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+footer {
+    margin-top: 50px;
+    padding: 25px;
+    background-color: #222;
+    color: #888;
+    border-top: 3px solid var(--neon-purple);
+}
+
+table {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: white;
+}
+
+th {
+    padding-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+/* Efecto para el primer puesto */
+tr:nth-child(1) td {
+    color: #ffd700 !important;
+    text-shadow: 0 0 5px #ffd700;
+}
+:root {
+    --neon-cyan: #00ffc8;
+    --neon-purple: #6c5ce7;
+    --neon-pink: #ff00ff;
+}
+
+/* Estilo para el boton volver si no lo tenias */
+.boton-jugar {
+    display: inline-block;
+    background-color: var(--neon-purple);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-jugar:hover {
+    background-color: var(--neon-cyan);
+    color: black;
+    transform: scale(1.1);
+}
