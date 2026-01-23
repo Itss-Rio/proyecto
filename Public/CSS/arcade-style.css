@@ -149,3 +149,44 @@ tr:nth-child(1) td {
     color: black;
     transform: scale(1.1);
 }
+
+.boton-contacto:hover {
+        background-color: #8e7ceb; 
+        transform: translateY(-2px) scale(1.05); 
+        box-shadow: 0 0 20px #6c5ce7, 0 0 40px #00ffc8, 0 0 60px #ff00ff;
+    }
+
+.boton-contacto::after {
+        content: '|';
+        animation: blink 1s step-start infinite;
+    }
+
+.boton-contacto {
+        display: inline-block;
+        background-color: #6c5ce7; 
+        color: white;
+        padding: 12px 25px;
+        border-radius: 8px; 
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        text-shadow: 0 0 5px #fff, 0 0 10px #6c5ce7, 0 0 20px #00ffc8;
+        position: relative;
+    }
+
+    .boton-contacto:hover {
+        background-color: #8e7ceb;
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #6c5ce7, 0 0 40px #00ffc8, 0 0 60px #ff00ff;
+    }
+
+    /* Contenedor de los juegos en fila */
+.juegos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra los juegos horizontalmente */
+    gap: 40px;               /* Espacio entre juegos */
+}
+

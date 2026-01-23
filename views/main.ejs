@@ -36,6 +36,29 @@
             font-family: 'Press Start 2P', cursive;
             font-size: 8px;
         }
+
+        /* --------------------- */
+        /* Ajustes para mantener Contacto abajo */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1; /* Ocupa todo el espacio entre header y footer */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Los juegos arriba */
+            padding: 50px 20px; /* mantiene tu padding actual */
+        }
+
+        .contacto-container {
+            margin-top: auto; /* Empuja este div al fondo */
+            text-align: center;
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -44,45 +67,73 @@
     <h1>ARCADE CLASICO</h1>
     <div class="nav-user-zone">
         <% if (user) { %>
-            <span style="color: var(--neon-pink);">USUARIO: <%= user.username.toUpperCase() %></span>
-            <a href="/logout" class="btn-action" style="background: #e74c3c; margin-left: 10px;">SALIR</a>
+            <span style="color: var(--neon-pink);">
+                USUARIO: <%= user.username.toUpperCase() %>
+            </span>
+
+            <a href="/logout" class="btn-action"
+               style="background:#e74c3c; margin-left:10px;">
+               SALIR
+            </a>
+
+            <!-- NUEVO BOTÓN BORRAR CUENTA -->
+            <form action="/delete-account" method="POST"
+                  onsubmit="return confirm('¿ESTÁS SEGURO? ESTA ACCIÓN NO SE PUEDE DESHACER');"
+                  style="display:inline;">
+                <button type="submit" class="btn-action"
+                        style="background:#c0392b; margin-left:5px;">
+                    BORRAR CUENTA
+                </button>
+            </form>
+
         <% } else { %>
-            <button onclick="toggleModal('loginModal')" class="btn-action">ENTRAR</button>
+            <button onclick="toggleModal('loginModal')" class="btn-action">
+                ENTRAR
+            </button>
         <% } %>
     </div>
 </header>
 
 <main>
-    <div class="juego">
-        <img src="/Imagenes/new-snake.webp" alt="Snake">
-        <h2>SNAKE</h2>
-        <p>Cuanta hambre tiene tu serpiente?</p>
-        <div style="display: flex; gap: 5px; justify-content: center;">
-            <a href="/HTML/snake.html" class="boton-jugar">JUGAR</a>
-            <a href="/ranking/snake" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
+    <!-- Contenedor para los juegos -->
+    <div class="juegos-container">
+        <div class="juego">
+            <img src="/Imagenes/new-snake.webp" alt="Snake">
+            <h2>SNAKE</h2>
+            <p>Cuanta hambre tiene tu serpiente?</p>
+            <div style="display: flex; gap: 5px; justify-content: center;">
+                <a href="/HTML/snake.html" class="boton-jugar">JUGAR</a>
+                <a href="/ranking/snake" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
+            </div>
+        </div>
+
+        <div class="juego">
+            <img src="/Imagenes/images.jpg" alt="Tetris">
+            <h2>TETRIS</h2>
+            <p>Ordena los bloques antes del colapso.</p>
+            <div style="display: flex; gap: 5px; justify-content: center;">
+                <a href="/HTML/tetris.html" class="boton-jugar">JUGAR</a>
+                <a href="/ranking/tetris" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
+            </div>
+        </div>
+
+        <div class="juego">
+            <img src="/Imagenes/dino-game.png" alt="Dino">
+            <h2>DINO RUN</h2>
+            <p>Salta cactus en el desierto.</p>
+            <div style="display: flex; gap: 5px; justify-content: center;">
+                <a href="/HTML/dino-chrome.html" class="boton-jugar">JUGAR</a>
+                <a href="/ranking/dino" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
+            </div>
         </div>
     </div>
 
-    <div class="juego">
-        <img src="/Imagenes/images.jpg" alt="Tetris">
-        <h2>TETRIS</h2>
-        <p>Ordena los bloques antes del colapso.</p>
-        <div style="display: flex; gap: 5px; justify-content: center;">
-            <a href="/HTML/tetris.html" class="boton-jugar">JUGAR</a>
-            <a href="/ranking/tetris" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
-        </div>
-    </div>
-
-    <div class="juego">
-        <img src="/Imagenes/dino-game.png" alt="Dino">
-        <h2>DINO RUN</h2>
-        <p>Salta cactus en el desierto.</p>
-        <div style="display: flex; gap: 5px; justify-content: center;">
-            <a href="/HTML/dino-chrome.html" class="boton-jugar">JUGAR</a>
-            <a href="/ranking/dino" class="btn-action" style="background: #333; font-size: 7px;">RANKING</a>
-        </div>
+    <!--  Contacto al fondo -->
+    <div class="contacto-container">
+        <a href="/HTML/contacto.html" class="boton-contacto">Contacto</a>
     </div>
 </main>
+
 
 <div id="loginModal" class="modal">
     <div class="modal-content">

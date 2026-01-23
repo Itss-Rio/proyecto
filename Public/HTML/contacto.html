@@ -6,38 +6,37 @@
   <link rel="stylesheet" href="../CSS/formato1.css">
   <link rel="icon" type="image/x-icon" href="../Imagenes/maquina-arcade.webp">
 </head>
-<body style="zoom: 0.88; font-family: 'Press Start 2P', cursive;">
+<body>
 
-  <h1 >Contacto</h1>
+  <h1>Contacto</h1>
 
-  <!-- Formulario básico -->
-<main class="contacto-container">
-  <form action="#" method="post">
-    <div class="form-group">
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" name="name" required placeholder="Tu nombre">
-    </div>
+  <main class="contacto-container">
+    <form action="/contact" method="post">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required placeholder="Tu nombre">
+      </div>
 
-    <div class="form-group">
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" name="email" required placeholder="example@example.com">
-    </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required placeholder="example@example.com">
+      </div>
 
-    <div class="form-group">
-      <label for="subject">Asunto:</label>
-      <input type="text" id="subject" name="subject" placeholder="Asunto (opcional)">
-    </div>
+      <div class="form-group">
+        <label for="subject">Asunto:</label>
+        <input type="text" id="subject" name="subject" placeholder="Asunto (opcional)">
+      </div>
 
-    <div class="form-group">
-      <label for="message">Mensaje:</label>
-      <textarea id="message" name="message" rows="6" required placeholder="Escribe tu mensaje aquí"></textarea>
-    </div>
+      <div class="form-group">
+        <label for="message">Mensaje:</label>
+        <textarea id="message" name="message" rows="6" required placeholder="Escribe tu mensaje aquí"></textarea>
+      </div>
 
-    <button type="submit" class="boton-contacto">Enviar</button>
-  </form>
+      <button type="submit" class="boton-contacto">Enviar</button>
+    </form>
 
-  <a class="boton" href="/">Volver al Inicio</a>
-</main>
+    <a class="boton-volver" href="/">Volver al Inicio</a>
+  </main>
 
 </body>
 </html>
