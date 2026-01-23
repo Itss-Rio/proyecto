@@ -94,7 +94,7 @@ function gameOver() {
     gameStarted = false;
     mensaje.style.display = "flex";
     mensaje.innerHTML = "GAME OVER<br><span>ESPACIO PARA REINTENTAR</span>";
-    enviarPuntuacion('score_tetris', score); // Cambiado para tu BD
+    enviarPuntuacion('tetris', score); // Cambiado para tu BD
 }
 
 function startGame() {
@@ -114,11 +114,11 @@ document.addEventListener("keydown", event => {
 
 draw();
 
-function enviarPuntuacion(columnaBD, puntos) {
+function enviarPuntuacion(game, puntos) {
     fetch('/api/save-score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ game: columnaBD, score: puntos })
+        body: JSON.stringify({ game: game, score: puntos })
     })
     .then(res => res.json())
     .catch(err => console.error(err));

@@ -96,7 +96,7 @@ main {
 
 .btn-action:hover {
     background-color: var(--neon-cyan);
-    color: black;
+    color: rgb(33, 203, 255);
     box-shadow: 0 0 15px var(--neon-cyan);
 }
 

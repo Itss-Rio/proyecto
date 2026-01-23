@@ -197,7 +197,7 @@ function GanarPuntos() {
 function GameOver() {
     Estrellarse();
     gameOver.style.display = "block";
-    enviarPuntuacion('score_dino', score); // Cambiado para coincidir con tu BD
+    enviarPuntuacion('dino', score); // Cambiado para coincidir con tu BD
 }
 
 function DetectarColision() {
@@ -225,11 +225,11 @@ function ReiniciarJuego() {
 
 document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
 
-function enviarPuntuacion(columnaBD, puntos) {
+function enviarPuntuacion(game, puntos) {
     fetch('/api/save-score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ game: columnaBD, score: puntos })
+        body: JSON.stringify({ game: game, score: puntos })
     })
     .then(res => res.json())
     .then(data => console.log(data.success ? "Puntuación guardada" : "Error: " + data.error))

@@ -77,7 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // COLISIONES Y GUARDADO
         if (headX < 0 || headY < 0 || headX >= canvas.width || headY >= canvas.height || snake.some(seg => seg.x === headX && seg.y === headY)) {
             clearInterval(game); running = false;
-            enviarPuntuacion('score_snake', score); // Cambiado para tu BD
+            enviarPuntuacion('snake', score); // Cambiado para tu BD
             setTimeout(() => { alert("Perdiste! Puntuación: " + score); resetGame(); }, 100);
             return;
         }
@@ -103,11 +103,11 @@ window.addEventListener("DOMContentLoaded", () => {
     ctx.fillText("Presiona ESPACIO para jugar", 25, canvas.height / 2);
 });
 
-function enviarPuntuacion(columnaBD, puntos) {
+function enviarPuntuacion(game, puntos) {
     fetch('/api/save-score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ game: columnaBD, score: puntos })
+        body: JSON.stringify({ game: game, score: puntos })
     })
     .then(res => res.json())
     .catch(err => console.error(err));

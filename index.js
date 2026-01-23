@@ -12,7 +12,7 @@ app.set("views", path.join(__dirname, "views"));
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Sesiones
@@ -120,6 +120,8 @@ app.get("/ranking/:game", (req, res) => {
 
 // Guardar puntuación
 app.post("/api/save-score", (req, res) => {
+    console.log(req.body);
+
     if (!req.session.user) {
         return res.status(401).json({ error: "No has iniciado sesión" });
     }
@@ -131,6 +133,7 @@ app.post("/api/save-score", (req, res) => {
     if (game === 'snake') column = 'score_snake';
     else if (game === 'tetris') column = 'score_tetris';
     else if (game === 'dino') column = 'score_dino';
+
 
     if (!column) return res.status(400).json({ error: "Juego no válido" });
 
