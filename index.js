@@ -171,7 +171,7 @@ app.get("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/");
 });
-
+ 
 //FORMULARIO DE CONTACTO 
 app.post("/contact", async (req, res) => {
     const { name, email, subject, message } = req.body;
