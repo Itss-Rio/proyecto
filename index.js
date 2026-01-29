@@ -207,8 +207,7 @@ app.post("/contact", async (req, res) => {
 });
 
 // --- INICIO ---
-const cliPort = parseInt(process.argv[2], 10);
-const port = !isNaN(cliPort) ? cliPort : (process.env.PORT || 5000);
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`Servidor activo en http://localhost:${port}`);
