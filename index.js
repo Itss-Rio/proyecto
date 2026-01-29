@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mysql = require("mysql2");
 const session = require("express-session");
@@ -24,11 +25,11 @@ app.use(session({
 
 // --- CONEXIÓN BD ---
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    port: 3308,
-    database: 'ranking'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME
 });
 
 db.connect((err) => {
@@ -171,7 +172,7 @@ app.get("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/");
 });
- 
+
 //FORMULARIO DE CONTACTO 
 app.post("/contact", async (req, res) => {
     const { name, email, subject, message } = req.body;
@@ -182,10 +183,10 @@ app.post("/contact", async (req, res) => {
 
     // Configura tu correo y contraseña
     let transporter = nodemailer.createTransport({
-        service: "Gmail", // Cambia si no usas Gmail
+        service: process.env.SMTP_SERVICE, // Cambia si no usas Gmail
         auth: {
-            user: "arcademinigamewebweb@gmail.com",       // <-- Tu email
-            pass: "vllygrfjoncqnypy" // <-- App password o contraseña
+            user: process.env.SMTP_USER,       // <-- Tu email
+            pass: process.env.SMTP_PASS // <-- App password o contraseña
         }
     });
 
@@ -206,6 +207,9 @@ app.post("/contact", async (req, res) => {
 });
 
 // --- INICIO ---
-app.listen(3000, () => {
-    console.log("Servidor activo en http://localhost:3000");
+const cliPort = parseInt(process.argv[2], 10);
+const port = !isNaN(cliPort) ? cliPort : (process.env.PORT || 5000);
+
+app.listen(port, () => {
+    console.log(`Servidor activo en http://localhost:${port}`);
 });
